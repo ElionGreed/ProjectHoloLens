@@ -28,3 +28,9 @@ Updates:
   
   Romain
   - Texturing, Character Designs
+
+  Danae
+  - Character models
+  
+  Frankie
+  - Character models
