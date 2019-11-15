@@ -12,6 +12,7 @@ Updates:
   - Minor Project Settings Change
   
 15/11/19 - Elion, Bart, Peter, Romain, Fadwa
+  
   Bart 
   - NavMesh, State Mech, Interactable Objects
   
@@ -25,4 +26,5 @@ Updates:
   - Height Map, Adding More HoloLens Interact Objects
   - Added SDK with Minor Object
   
-  
+  Romain
+  - Texturing, Character Designs
