@@ -11,7 +11,7 @@ Updates:
   - Added Proc Generation Terrain with Perlin Noise
   - Minor Project Settings Change
   
-15/11/19 - Elion, Bart, Peter etc
+15/11/19 - Elion, Bart, Peter, Romain, Fadwa
   Bart 
   - NavMesh, State Mech, Interactable Objects
   
