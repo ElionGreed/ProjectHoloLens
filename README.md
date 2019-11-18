@@ -43,4 +43,4 @@ Updates:
   - Added script files for D* Lite final pathfinding implementation.
   
   Bart 
-  State Mech, Interactable Objects
+  - State Mech, Interactable Objects
