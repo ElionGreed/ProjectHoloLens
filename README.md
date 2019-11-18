@@ -21,6 +21,8 @@ Updates:
   
   Fadwa
   - Pathfinding
+  - Added A* path planning (placeholder)
+  - Added script files for D* Lite final pathfinding implementation.
   
   Elion 
   - Height Map, Adding More HoloLens Interact Objects
@@ -34,3 +36,11 @@ Updates:
   
   Frankie
   - Character models
+  
+  
+ 17/11/19 Fadwa
+  - Added A* path planning (placeholder)
+  - Added script files for D* Lite final pathfinding implementation.
+  
+  Bart 
+  State Mech, Interactable Objects
