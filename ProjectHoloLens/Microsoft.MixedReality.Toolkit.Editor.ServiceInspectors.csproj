@@ -73,16 +73,16 @@
     <Compile Include="Assets\MixedRealityToolkit\Inspectors\ServiceInspectors\TeleportSystemInspector.cs" />
     <None Include="Assets\MixedRealityToolkit\Inspectors\ServiceInspectors\Microsoft.MixedReality.Toolkit.Editor.ServiceInspectors.asmdef" />
     <Reference Include="UnityEditor.UI">
-      <HintPath>D:/UNI/ProjectHoloLense2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>D:/UNI/ProjectHoloLens2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>D:/UNI/ProjectHoloLense2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>D:/UNI/ProjectHoloLens2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.TestRunner">
-      <HintPath>D:/UNI/ProjectHoloLense2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
+      <HintPath>D:/UNI/ProjectHoloLens2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TestRunner">
-      <HintPath>D:/UNI/ProjectHoloLense2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
+      <HintPath>D:/UNI/ProjectHoloLens2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -277,7 +277,7 @@
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/16.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>D:/UNI/ProjectHoloLense2/ProjectHoloLens/ProjectHoloLens/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
+      <HintPath>D:/UNI/ProjectHoloLens2/ProjectHoloLens/ProjectHoloLens/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>D:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

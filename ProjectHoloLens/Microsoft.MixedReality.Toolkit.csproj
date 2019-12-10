@@ -437,10 +437,10 @@
     <None Include="Assets\MixedRealityToolkit\StandardAssets\Shaders\MRTK_Wireframe.shader" />
     <None Include="Assets\MixedRealityToolkit\WhereToStart.txt" />
     <Reference Include="UnityEditor.UI">
-      <HintPath>D:/UNI/ProjectHoloLense2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>D:/UNI/ProjectHoloLens2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>D:/UNI/ProjectHoloLense2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>D:/UNI/ProjectHoloLens2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

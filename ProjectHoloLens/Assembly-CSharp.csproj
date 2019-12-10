@@ -128,37 +128,37 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>D:/UNI/ProjectHoloLense2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>D:/UNI/ProjectHoloLens2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>D:/UNI/ProjectHoloLense2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>D:/UNI/ProjectHoloLens2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/UNI/ProjectHoloLense2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>D:/UNI/ProjectHoloLens2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>D:/UNI/ProjectHoloLense2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>D:/UNI/ProjectHoloLens2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>D:/UNI/ProjectHoloLense2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>D:/UNI/ProjectHoloLens2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>D:/UNI/ProjectHoloLense2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>D:/UNI/ProjectHoloLens2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>D:/UNI/ProjectHoloLense2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>D:/UNI/ProjectHoloLens2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.WindowsMR.Editor">
-      <HintPath>D:/UNI/ProjectHoloLense2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/Unity.XR.WindowsMR.Editor.dll</HintPath>
+      <HintPath>D:/UNI/ProjectHoloLens2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/Unity.XR.WindowsMR.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/UNI/ProjectHoloLense2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>D:/UNI/ProjectHoloLens2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.WindowsMR">
-      <HintPath>D:/UNI/ProjectHoloLense2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/Unity.XR.WindowsMR.dll</HintPath>
+      <HintPath>D:/UNI/ProjectHoloLens2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/Unity.XR.WindowsMR.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>D:/UNI/ProjectHoloLense2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>D:/UNI/ProjectHoloLens2/ProjectHoloLens/ProjectHoloLens/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

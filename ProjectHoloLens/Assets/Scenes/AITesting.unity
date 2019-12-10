@@ -1727,7 +1727,6 @@ GameObject:
   - component: {fileID: 1970817261}
   - component: {fileID: 1970817260}
   - component: {fileID: 1970817259}
-  - component: {fileID: 1970817258}
   - component: {fileID: 1970817257}
   m_Layer: 0
   m_Name: Companion (1)
@@ -1752,27 +1751,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1970817258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1970817256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44a12834366e0ca4aa43201711d35e76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  utilityValues:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  companionHealth: 100
-  player: {fileID: 1118994469}
-  runAwaySpot: {fileID: 794111051}
 --- !u!195 &1970817259
 NavMeshAgent:
   m_ObjectHideFlags: 0
