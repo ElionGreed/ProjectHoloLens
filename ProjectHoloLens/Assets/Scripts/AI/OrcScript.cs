@@ -21,7 +21,7 @@ public class OrcScript : MonoBehaviour
     GameObject player;
     GameObject[] waypoints;
     [SerializeField]
-    float enemyHealth = 6;
+    float enemyHealth = 100;
     float distance = 0;
     bool attacked = false;
     int damage = 2;
