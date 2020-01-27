@@ -1,6 +1,9 @@
-﻿// using UnityEngine;
+﻿using UnityEngine;
 
-// public class Dlite : MonoBehaviour {
+public class Dlite : MonoBehaviour
+{
+
+}
 //     //start position
 //     private node startNode; 
 //     //target position

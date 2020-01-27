@@ -480,7 +480,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 0f899ebd9b510c94a86cf31ae49d9db7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -824,8 +824,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1299450318}
-  - component: {fileID: 1299450317}
   - component: {fileID: 1299450319}
+  - component: {fileID: 1299450317}
   m_Layer: 0
   m_Name: D*Lite
   m_TagString: Untagged
@@ -842,15 +842,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1299450316}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a639741d80a93c449fe4d8c719ae638, type: 3}
+  m_Script: {fileID: 11500000, guid: 78ca7f7c1eb4aa342867913e7ad5729c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridWorldSize: {x: 30, y: 30}
-  nodeRadius: 0.5
+  displayGridGizmos: 1
   unwalkableMask:
     serializedVersion: 2
     m_Bits: 256
-  player: {fileID: 381885611}
+  gridWorldSize: {x: 30, y: 30}
+  nodeRadius: 0.5
 --- !u!4 &1299450318
 Transform:
   m_ObjectHideFlags: 0
