@@ -17,7 +17,7 @@ public class GridLite : MonoBehaviour
     int gridSizeY;
 
     //2d array of nodes
-    Node[,] grid;
+    NodeLite[,] grid;
 
     private void Start()
     {
@@ -32,7 +32,7 @@ public class GridLite : MonoBehaviour
     private void CreateGrid()
     {
         //new 2d array of nodes with size of gridsizex, gridsizey
-        grid = new Node[gridSizeX, gridSizeY];
+        grid = new NodeLite[gridSizeX, gridSizeY];
 
         //transform.position = (0,0,0), vector3.right = (1,0,0), vector3.back= (0,0,-1)
         Vector3 worldBottomRight = transform.position + Vector3.right * gridWorldSize.x / 2 - Vector3.back * gridWorldSize.y / 2;
@@ -48,13 +48,13 @@ public class GridLite : MonoBehaviour
                 //collision check
                 bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask)); //checksphere return true if collision occured, so if it returns false, walkable is true
                 //populating grid
-                grid[x, y] = new Node(walkable, worldPoint,x,y);
+                grid[x, y] = new NodeLite(walkable, worldPoint,x,y);
             }
         }
     }
 
     //to find node the player is in: convert worldposition into grid coordinate
-    public Node NodeCoordinates(Vector3 worldPosition)
+    public NodeLite NodeCoordinates(Vector3 worldPosition)
     {
         //convert world position into perfecntage based on how far along the grid it is,
         //taking into account the node radius and the position of the gameobject this code(grid) is attached to
@@ -65,6 +65,7 @@ public class GridLite : MonoBehaviour
         percentX = Mathf.Clamp01(percentX);
         percentY = Mathf.Clamp01(percentY);
 
+        //"-1" used to stay inside the array
         int x = Mathf.RoundToInt((gridSizeX - 1) * percentX);
         int y = Mathf.RoundToInt((gridSizeY - 1) * percentY);
         return grid[x, y];
@@ -78,7 +79,7 @@ public class GridLite : MonoBehaviour
         if (grid != null)
         {
             // Node playerNode = NodeFromWorldPoint(player.position);
-            foreach (Node n in grid)
+            foreach (NodeLite n in grid)
             {
                 Gizmos.color = (n.walkable) ? Color.white : Color.red;
                 /*if (playerNode == n)
