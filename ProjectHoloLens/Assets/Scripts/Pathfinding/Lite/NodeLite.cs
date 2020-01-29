@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using System.Collections;
 
-public class NodeLite : MonoBehaviour
+public class NodeLite : IHeapItem<NodeLite>
 {
     //state of node
     public bool walkable;
@@ -22,6 +23,13 @@ public class NodeLite : MonoBehaviour
         worldPosition = _worldPosition;
         gridX = _gridX;
         gridY = _gridY;
+    }
+
+    public int HeapIndex { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
+    public int CompareTo(NodeLite other)
+    {
+        throw new System.NotImplementedException();
     }
 
     //    public int FCost

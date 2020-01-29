@@ -5,11 +5,21 @@ using UnityEngine;
 public class Dlite : MonoBehaviour
 {
     GridLite grid;
-    
+    private NodeLite startNode;
+    private NodeLite targetNode;
+    private double km;
+
+    double rhs;
+    double g;
     //a big list would rather be a hashset - for better performance
 
+    //list containing nodes that make up shortest path
+    List<NodeLite> path = new List<NodeLite>();
+    //open list
+    private Heap<NodeLite> openList;
 
-    private void Awake()
+
+    void Awake()
     {
         //get grid component 
         grid = GetComponent<GridLite>();
@@ -17,14 +27,64 @@ public class Dlite : MonoBehaviour
 
     //find path - first iteration
 
-    void FindPath(Vector3 startPos, Vector3 targetPos)
+    private bool init(Vector3 startPos, Vector3 targetPos)
+    {
+        //retrieving coordinates of the start and end nodes on the grid
+        startNode = grid.NodeCoordinates(startPos);
+        targetNode = grid.NodeCoordinates(targetPos);
+
+        if (startNode.walkable && targetNode.walkable)
+        {
+            openList = new Heap<NodeLite>(GridLite.MaxSize);
+
+        }
+        //initialise all g and rhs values = infinity, except for target node w/ rhs = 0
+        //when g=rhs - node is locally consistent
+
+        //for each walkable node
+        
+        g = double.PositiveInfinity;
+        rhs =
+
+        //initialise key modifier = 0
+        km = 0;
+
+        //add goal node to queue w/ key<h,rhs>
+    }
+
+    double calcRHS(NodeLite n)
+    {
+
+    }
+
+    double calcG(NodeLite n)
+    {
+
+    }
+
+    double calcKey(NodeLite n)
+    {
+        double key = min(n.g, n.rhs) + Heuristic(startNode, targetNode) + km + min(n.g, n.rhs);
+        //key first and key second?
+        return key;
+    }
+
+    void PlanInitialPath(Vector3 startPos, Vector3 targetPos)
     {
         NodeLite startNode = grid.NodeCoordinates(startPos);
         NodeLite targetNode = grid.NodeCoordinates(targetPos);
 
-        List<NodeLite> openSet = new List<NodeLite>();
+        //openlist containing nodes to be evaluated
+        //List<NodeLite> openList = new List<NodeLite>();
+
+        //HashSet<NodeLite> 
+
+
 
     }
+    //add node to open list
+    //remove
+    //update
 
 
     //http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html
@@ -37,7 +97,8 @@ public class Dlite : MonoBehaviour
 
         double dx = Math.Abs(start.gridX - end.gridX);
         double dy = Math.Abs(start.gridY - end.gridY);
-        return D * (dx + dy) + (D2 - 2 * D) * min(dx, dy);
+        //return D * (dx + dy) + (D2 - 2 * D) * min(dx, dy);
+        return dx + dy;
     }
 
     double RealDistance(NodeLite start, NodeLite end)
@@ -49,12 +110,14 @@ public class Dlite : MonoBehaviour
     }
 }
 //     //start position
-//     private node startNode; 
+//     private node startNode;
 //     //target position
 //     private node targetNode;
 //     private node lastNode;
+
 //     //list of nodes to be evaluated
 //     private heap<node>openList;
+
 //     //list of already-evaluated nodes
 //     private heap<node>closedList;
 
