@@ -7,13 +7,15 @@ public class NodeLite : IHeapItem<NodeLite>
     public bool walkable;
     //the position of the node in the world
     public Vector3 worldPosition;
-
     public int gridX;
     public int gridY;
-    //    public double rhs;
+
+    public double rhs;
+    public double g;
     //    public double cost;
-    //    public int gCost;
-    //    public int hCost;
+
+    public int gCost;
+    public int hCost;
     //    int heapIndex; //***
 
     //constructor 
@@ -25,20 +27,38 @@ public class NodeLite : IHeapItem<NodeLite>
         gridY = _gridY;
     }
 
-    public int HeapIndex { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    //initislidr g and rhs values
+    public void InitNodesValues(double _rhs, double _g)
+    {
+        rhs = _rhs;
+        g = _g;
+    }
+
+    public int fcost
+    {
+        //fcost is never assigned, only retrieved, hence no set 
+        get
+        {
+            return gCost + hCost;
+        }
+    }
+
+    public int HeapIndex
+    {
+        get
+        {
+            return HeapIndex;
+        }
+        set
+        {
+            HeapIndex = value;
+        }
+    }
 
     public int CompareTo(NodeLite other)
     {
         throw new System.NotImplementedException();
     }
-
-    //    public int FCost
-    //    {
-    //        get
-    //        {
-    //            return gCost + hCost;
-    //        }
-    //    }
 
     //    public int HeapIndex
     //    {

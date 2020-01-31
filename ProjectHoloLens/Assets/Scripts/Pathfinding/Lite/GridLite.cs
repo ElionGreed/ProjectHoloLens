@@ -49,7 +49,35 @@ public class GridLite : MonoBehaviour
                 bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask)); //checksphere return true if collision occured, so if it returns false, walkable is true
                 //populating grid
                 grid[x, y] = new NodeLite(walkable, worldPoint,x,y);
+
+                //initialising rhs and g values of nodes - except target node which will be rewritten in Dlite.cs
+                grid[x, y].InitNodesValues(double.PositiveInfinity, double.PositiveInfinity);
+
             }
+        }
+    }
+
+    public int gridSize
+    {
+        get
+        {
+            return gridSizeX * gridSizeY;
+        }
+    }
+
+    public int sizeX
+    {
+        get
+        {
+            return gridSizeX;
+        }
+    }
+
+    public int sizeY
+    {
+        get
+        {
+            return gridSizeY;
         }
     }
 
