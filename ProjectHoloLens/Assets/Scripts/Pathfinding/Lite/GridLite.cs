@@ -57,6 +57,36 @@ public class GridLite : MonoBehaviour
         }
     }
 
+    public List<NodeLite> GetNeighbours(NodeLite n)
+    {
+        //list of neighbours
+        List<NodeLite> neighbours = new List<NodeLite>();
+
+        //search in 3x3 blocks, -1, 0 ,1 relative to the node's position, where (0,0) is centre of said node
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                //skip the node itself
+                if (x == 0 && y == 0)
+                {
+                    continue;
+                }
+
+                //node's x and y 
+                int checkX = n.gridX + x;
+                int checkY = n.gridY + y;
+
+                //check if node is inside grid's limits
+                if (checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY)
+                {
+                    neighbours.Add(grid[checkX, checkY]);
+                }
+            }
+        }
+        return neighbours;
+    }
+
     public int gridSize
     {
         get

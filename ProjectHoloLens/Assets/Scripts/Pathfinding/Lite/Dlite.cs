@@ -58,19 +58,25 @@ public class Dlite : MonoBehaviour
         //initialise all g and rhs values = infinity, except for target node w/ rhs = 0
         //when g=rhs - node is locally consistent
 
-        //for each walkable node
-        
-        g = double.PositiveInfinity;
-        //rhs =
-
         //add goal node to queue w/ key<h,rhs>
     }
 
+
+    //---------------------openList functions
     void AddToOpenList(NodeLite n)
     {
         openList.Add(n);
     }
 
+    void RemoveFromOpenList()
+    {
+        openList.RemoveFirst();
+    }
+
+    void UpdateOpenList(NodeLite n)
+    {
+        openList.UpdateItem(n);
+    }
 
     //these functions would be in the node class, right?7
     //double calcRHS(NodeLite n)
@@ -109,10 +115,6 @@ public class Dlite : MonoBehaviour
         }
 
     }
-    //add node to open list
-    //remove
-    //update
-
 
     //http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html
     //On a square grid that allows 8 directions of movement, use Diagonal distance (L∞).
