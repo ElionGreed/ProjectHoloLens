@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &91380017
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1728,6 +1728,7 @@ GameObject:
   - component: {fileID: 1970817260}
   - component: {fileID: 1970817259}
   - component: {fileID: 1970817257}
+  - component: {fileID: 1970817258}
   m_Layer: 0
   m_Name: Companion (1)
   m_TagString: Enemy
@@ -1751,6 +1752,35 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1970817258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1970817256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3081ca8fe4047124496347abfc2e1ce8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1118994469}
+  myHealth: 0
+  currState: 0
+  stateIndicator: 0
+  States:
+  - perform: 0
+    transitions:
+    - transitTo: 1
+      checkMyHealth: 0
+      checkCloseDistance: 0
+      checkDistance: 1
+  - perform: 1
+    transitions:
+    - transitTo: 0
+      checkMyHealth: 1
+      checkCloseDistance: 0
+      checkDistance: 0
 --- !u!195 &1970817259
 NavMeshAgent:
   m_ObjectHideFlags: 0
