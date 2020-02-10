@@ -27,7 +27,7 @@ public class NodeLite : IHeapItem<NodeLite>
         gridY = _gridY;
     }
 
-    //initislidr g and rhs values
+    //initialise g and rhs values
     public void InitNodesValues(double _rhs, double _g)
     {
         rhs = _rhs;

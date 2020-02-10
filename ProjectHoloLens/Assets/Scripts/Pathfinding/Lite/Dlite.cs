@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class Dlite : MonoBehaviour
@@ -7,9 +9,11 @@ public class Dlite : MonoBehaviour
     GridLite grid;
     private NodeLite startNode;
     private NodeLite targetNode;
+    //when the start node moves, the old start node becomes lastnode, and the new one becomes the new startnode
     private NodeLite lastNode;
-
+    //key modifier, used to account for the changing heuristic values as the start node moves, it is added to new items added to the priority
     private double km;
+    //cost?
     private double C1 = 1.0;
 
     double rhs;
@@ -23,10 +27,14 @@ public class Dlite : MonoBehaviour
     //closed list
     HashSet<NodeLite> closedList;
 
+    PathManager manager;
+
     void Awake()
     {
         //get grid component 
         grid = GetComponent<GridLite>();
+        manager = GetComponent<PathManager>();
+        
     }
 
     //find path - first iteration
@@ -40,25 +48,48 @@ public class Dlite : MonoBehaviour
         if (startNode.walkable && targetNode.walkable)
         {
             //openList = new Heap<NodeLite>(grid.gridSize);
+
             //initialise key modifier = 0
             km = 0;
             //targetnode's starting rhs = 0, all other nodes start w/ +ive infinity
             targetNode.rhs = 0.0;
-            targetNode.g = C1; //g = cost?
+            //targetNode.g = C1; //g = cost?
+            //targetNode.g = Mathf.Infinity;
             //add targetnode to the openlist with key<x,y>
             //calcKey(targetNode);
             AddToOpenList(targetNode);
 
+            print(targetNode.g);
             return true;
         }
         else
         {
+            print("start or target node not walkable");
             return false;
         }
         //initialise all g and rhs values = infinity, except for target node w/ rhs = 0
         //when g=rhs - node is locally consistent
 
         //add goal node to queue w/ key<h,rhs>
+    }
+
+    public void StartFindPath(Vector3 startPos, Vector3 targetPos, bool isFollowing)
+    {
+        StartCoroutine(FindPath(startPos, targetPos, isFollowing));
+    }
+
+    IEnumerator FindPath(Vector3 startPos, Vector3 targetPos, bool isFollowing)
+    {
+        Stopwatch sw = new Stopwatch();
+
+        if (!isFollowing)
+        {
+            if(init(startPos, targetPos))
+            {
+                print("hello");
+            }
+        }
+        yield return null;
     }
 
 
