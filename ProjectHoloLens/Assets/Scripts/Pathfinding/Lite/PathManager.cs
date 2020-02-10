@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class PathManager : MonoBehaviour
 {
-
-    Pathfinding pathfinding;
+    PathRequest currentPathRequest;
+    Dlite Dlite;
     int n;
 
     private void Awake()
     {
-        pathfinding = GetComponent<Pathfinding>();
+        Dlite = GetComponent<Dlite>();
     }
     // Start is called before the first frame update
     void Start()
@@ -23,6 +23,17 @@ public class PathManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public static void RequestPath(Vector3 start, Vector3 target, bool isFollowing, Action<Vector3, bool, bool> callback)
+    {
+        PathRequest newRequest = new PathRequest(start, target, isFollowing, callback);
+    }
+
+    //check this
+    void TryProcessingNext()
+    {
+        Dlite.StartFindPath(currentPathRequest.startPos, currentPathRequest.targetPos, currentPathRequest.isFollowing);
     }
 
     struct PathRequest
