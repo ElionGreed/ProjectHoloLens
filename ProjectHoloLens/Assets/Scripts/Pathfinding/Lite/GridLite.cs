@@ -139,13 +139,12 @@ public class GridLite : MonoBehaviour
             // Node playerNode = NodeFromWorldPoint(player.position);
             foreach (NodeLite n in grid)
             {
-                Gizmos.color = (n.walkable) ? Color.white : Color.red;
+                Gizmos.color = (n.walkable) ? Color.white : Color.grey;
                 /*if (playerNode == n)
                 {
                     Gizmos.color = Color.cyan;
                 }*/
-
-                Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - 0.1f));
+                Gizmos.DrawWireCube(n.worldPosition, Vector3.one * (nodeDiameter - 0.1f));
             }
         }
     }
