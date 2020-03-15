@@ -13,7 +13,8 @@ public class MovePlayer : MonoBehaviour
     float rotationSpeed = 5;
     float movementSpeed = 5;
 
-    GameObject pointer;
+    public GameObject arrowPrefab;
+    GameObject arrowInstance;
 
     //instantiate arrow at node player selected or instantiate different colour tile at centre of node selected
 
@@ -22,9 +23,16 @@ public class MovePlayer : MonoBehaviour
     {
           if (Input.GetMouseButtonDown(0))
           {
+              Destroy(arrowInstance);
               SetTargetPosition();
+              VisualisePosition();
           }
         Move();
+    }
+
+    private void VisualisePosition()
+    {
+        arrowInstance = (GameObject) Instantiate(arrowPrefab, targetPosition, Quaternion.identity);
     }
 
     private void SetTargetPosition()
