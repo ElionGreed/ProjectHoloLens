@@ -6,15 +6,15 @@ using System;
 public class Pathfinding : MonoBehaviour
 {
     public static PriorityQueue openList;
-    public static HashSet<Node> closedList;
+    public static HashSet<Nodes> closedList;
 
-    private static float HeuristicCost(Node currentNode, Node targetNode)
+    private static float HeuristicCost(Nodes currentNode, Nodes targetNode)
     {
         Vector3 HeuCost = currentNode.worldPosition - targetNode.worldPosition;
         return HeuCost.magnitude;
     }
 
-    public static ArrayList FindPath(Node start, Node goal)
+    public static ArrayList FindPath(Nodes start, Nodes goal)
     {
         //initialise open and closed lists
         //place start node in open list
@@ -24,8 +24,8 @@ public class Pathfinding : MonoBehaviour
         start.totalCostToHere = 0.0f;
         start.estimatedCostToTarget = HeuristicCost(start, goal);
 
-        closedList = new HashSet<Node>();
-        Node node = null;
+        closedList = new HashSet<Nodes>();
+        Nodes node = null;
 
         while (openList.Length != 0)
         {
@@ -41,7 +41,7 @@ public class Pathfinding : MonoBehaviour
 
             for (int i = 0; i < neighbours.Count; i++)
             {
-                Node neighbouringNode = (Node)neighbours[i];
+                Nodes neighbouringNode = (Nodes)neighbours[i];
 
                 //if not already in closed list
                 if (!closedList.Contains(neighbouringNode))
@@ -76,7 +76,7 @@ public class Pathfinding : MonoBehaviour
     }
 
     //adding nodes to path list (in correct order)
-    private static ArrayList TracePath(Node node)
+    private static ArrayList TracePath(Nodes node)
     {
         ArrayList path = new ArrayList();
         while (node != null)

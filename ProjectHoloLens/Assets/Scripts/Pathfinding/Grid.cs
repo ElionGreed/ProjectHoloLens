@@ -31,7 +31,7 @@ public class Grid : MonoBehaviour
     private Vector3 origin = new Vector3();
     private GameObject[] ObstaclesList;
     //all nodes in grid
-    public Node[,] nodes { get; set; }
+    public Nodes[,] nodes { get; set; }
     public Vector3 Origin { get { return origin; } }
 
     void Awake()
@@ -49,7 +49,7 @@ public class Grid : MonoBehaviour
     private void CalculateObstacles()
     {
         //2d array of nodes
-        nodes = new Node[numOfColumns, numOfRows];
+        nodes = new Nodes[numOfColumns, numOfRows];
         int index = 0;
 
         for (int i = 0; i < numOfColumns; i++)
@@ -58,7 +58,7 @@ public class Grid : MonoBehaviour
             {
                 //create nodes (default properties)
                 Vector3 cellPos = GetGridCellCentre(index);
-                Node node = new Node(cellPos);
+                Nodes node = new Nodes(cellPos);
                 nodes[i, j] = node;
                 index++; //unique index for each cell
             }
@@ -136,7 +136,7 @@ public class Grid : MonoBehaviour
     }
 
     //will be used by Pathfinding class to find neighbours of a given node
-    public void GetNeighbours(Node node, ArrayList neighbours)
+    public void GetNeighbours(Nodes node, ArrayList neighbours)
     {
         Vector3 neighbourPos = node.worldPosition; //world position of node 
         int neighbourIndex = GetGridIndex(neighbourPos); //index of that node
@@ -175,7 +175,7 @@ public class Grid : MonoBehaviour
             row < numOfRows &&
             col < numOfColumns)
         {
-            Node nodeToAdd = nodes[row, col];
+            Nodes nodeToAdd = nodes[row, col];
             //ensuring node to add is not an obstacle
             if (!nodeToAdd.unwalkable)
             {

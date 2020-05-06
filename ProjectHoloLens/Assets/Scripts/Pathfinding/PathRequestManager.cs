@@ -5,8 +5,8 @@ using UnityEngine;
 public class PathRequestManager : MonoBehaviour
 {
     private Transform startPos, endPos;
-    public Node startNode { get; set; }
-    public Node goalNode { get; set; }
+    public Nodes startNode { get; set; }
+    public Nodes goalNode { get; set; }
 
     //array found from findpath()
     public ArrayList pathArray;
@@ -57,9 +57,9 @@ public class PathRequestManager : MonoBehaviour
     {
         startPos = startObj.transform;
         endPos = endObj.transform;
-        startNode = new Node(Grid.instance.GetGridCellCentre
+        startNode = new Nodes(Grid.instance.GetGridCellCentre
             (Grid.instance.GetGridIndex(startPos.position)));
-        goalNode = new Node(Grid.instance.GetGridCellCentre
+        goalNode = new Nodes(Grid.instance.GetGridCellCentre
             (Grid.instance.GetGridIndex(endPos.position)));
 
         pathArray = Pathfinding.FindPath(startNode, goalNode);
@@ -75,11 +75,11 @@ public class PathRequestManager : MonoBehaviour
         if (pathArray.Count > 0)
         {
             int index = 1;
-            foreach(Node node in pathArray)
+            foreach(Nodes node in pathArray)
             {
                 if (index < pathArray.Count)
                 {
-                    Node nextNode = (Node)pathArray[index];
+                    Nodes nextNode = (Nodes)pathArray[index];
                     Gizmos.color = Color.red;
                     Gizmos.DrawLine(node.worldPosition, nextNode.worldPosition);
                     index++;
