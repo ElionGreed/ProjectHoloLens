@@ -1,61 +1,90 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System;
+using UnityEngine;
 
 public class PathRequestManager : MonoBehaviour
 {
+    private Transform startPos, endPos;
+    public Node startNode { get; set; }
+    public Node goalNode { get; set; }
 
-    Queue<PathRequest> pathRequestQueue = new Queue<PathRequest>();
-    PathRequest currentPathRequest;
+    //array found from findpath()
+    public ArrayList pathArray;
+    public int numOfMoves =5;
+    public int speed=20;
 
-    static PathRequestManager instance;
-    Pathfinding pathfinding;
+    //GameObject objStartCube, objEndCube;
+    GameObject startObj, endObj;
+    private float elapsedTime = 0.0f;
+    public float intervalTime = 1.0f;
 
-    bool isProcessingPath;
-
-    void Awake()
+    private void Start()
     {
-        instance = this;
-        pathfinding = GetComponent<Pathfinding>();
+        startObj = GameObject.FindGameObjectWithTag("Start");
+        endObj = GameObject.FindGameObjectWithTag("End");
+
+        pathArray = new ArrayList();
+        FindPath();
     }
 
-    public static void RequestPath(Vector3 pathStart, Vector3 pathEnd, Action<Vector3[], bool> callback)
+    private void Update()
     {
-        PathRequest newRequest = new PathRequest(pathStart, pathEnd, callback);
-        instance.pathRequestQueue.Enqueue(newRequest);
-        instance.TryProcessNext();
-    }
-
-    void TryProcessNext()
-    {
-        if (!isProcessingPath && pathRequestQueue.Count > 0)
+        elapsedTime += Time.deltaTime;
+        if (elapsedTime >= intervalTime)
         {
-            currentPathRequest = pathRequestQueue.Dequeue();
-            isProcessingPath = true;
-            pathfinding.StartFindPath(currentPathRequest.pathStart, currentPathRequest.pathEnd);
+            elapsedTime = 0.0f;
+            //*******DON'T UPDATE IF WE GOING TURN_BASED
+            //FindPath();
         }
     }
 
-    public void FinishedProcessingPath(Vector3[] path, bool success)
+    public void MoveUnit(GameObject unit)
     {
-        currentPathRequest.callback(path, success);
-        isProcessingPath = false;
-        TryProcessNext();
+        //Node currentNode = (Node) pathArray[0];
+
+        //for (int i = 0; i < numOfMoves; i++)
+        //{
+        //    if (startObj.transform.position != endObj.transform.position)
+        //    {
+        //        currentNode = (Node) pathArray[i];
+        //    }
+        //    Vector3 currentNodePos = currentNode.worldPosition;
+        //    startObj.transform.position = Vector3.MoveTowards(transform.position, currentNodePos, speed);
+        //}
     }
 
-    struct PathRequest
+    private void FindPath()
     {
-        public Vector3 pathStart;
-        public Vector3 pathEnd;
-        public Action<Vector3[], bool> callback;
+        startPos = startObj.transform;
+        endPos = endObj.transform;
+        startNode = new Node(Grid.instance.GetGridCellCentre
+            (Grid.instance.GetGridIndex(startPos.position)));
+        goalNode = new Node(Grid.instance.GetGridCellCentre
+            (Grid.instance.GetGridIndex(endPos.position)));
 
-        public PathRequest(Vector3 _start, Vector3 _end, Action<Vector3[], bool> _callback)
+        pathArray = Pathfinding.FindPath(startNode, goalNode);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (pathArray == null)
         {
-            pathStart = _start;
-            pathEnd = _end;
-            callback = _callback;
+            return;
         }
 
+        if (pathArray.Count > 0)
+        {
+            int index = 1;
+            foreach(Node node in pathArray)
+            {
+                if (index < pathArray.Count)
+                {
+                    Node nextNode = (Node)pathArray[index];
+                    Gizmos.color = Color.red;
+                    Gizmos.DrawLine(node.worldPosition, nextNode.worldPosition);
+                    index++;
+                }
+            }
+        }
     }
 }

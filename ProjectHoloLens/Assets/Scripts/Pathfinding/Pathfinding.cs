@@ -5,120 +5,86 @@ using System;
 
 public class Pathfinding : MonoBehaviour
 {
+    public static PriorityQueue openList;
+    public static HashSet<Node> closedList;
 
-    PathRequestManager requestManager;
-    Grid grid;
-
-    void Awake()
+    private static float HeuristicCost(Node currentNode, Node targetNode)
     {
-        requestManager = GetComponent<PathRequestManager>();
-        grid = GetComponent<Grid>();
+        Vector3 HeuCost = currentNode.worldPosition - targetNode.worldPosition;
+        return HeuCost.magnitude;
     }
 
-
-    public void StartFindPath(Vector3 startPos, Vector3 targetPos)
+    public static ArrayList FindPath(Node start, Node goal)
     {
-        StartCoroutine(FindPath(startPos, targetPos));
-    }
+        //initialise open and closed lists
+        //place start node in open list
+        //process rest of open list
+        openList = new PriorityQueue();
+        openList.Push(start);
+        start.totalCostToHere = 0.0f;
+        start.estimatedCostToTarget = HeuristicCost(start, goal);
 
-    IEnumerator FindPath(Vector3 startPos, Vector3 targetPos)
-    {
+        closedList = new HashSet<Node>();
+        Node node = null;
 
-        Vector3[] waypoints = new Vector3[0];
-        bool pathSuccess = false;
-
-        Node startNode = grid.NodeFromWorldPoint(startPos);
-        Node targetNode = grid.NodeFromWorldPoint(targetPos);
-
-
-        if (startNode.walkable && targetNode.walkable)
+        while (openList.Length != 0)
         {
-            Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
-            HashSet<Node> closedSet = new HashSet<Node>();
-            openSet.Add(startNode);
-
-            while (openSet.Count > 0)
+            node = openList.First(); //node with lowest F
+            //ensure we're not at target node already
+            if (node.worldPosition == goal.worldPosition)
             {
-                Node currentNode = openSet.RemoveFirst();
-                closedSet.Add(currentNode);
+                return TracePath(node);
+            }
 
-                if (currentNode == targetNode)
+            ArrayList neighbours = new ArrayList();
+            Grid.instance.GetNeighbours(node, neighbours);
+
+            for (int i = 0; i < neighbours.Count; i++)
+            {
+                Node neighbouringNode = (Node)neighbours[i];
+
+                //if not already in closed list
+                if (!closedList.Contains(neighbouringNode))
                 {
-                    pathSuccess = true;
-                    break;
-                }
+                    //path cost from node to its neighbours
+                    float cost = HeuristicCost(node, neighbouringNode);
 
-                foreach (Node neighbour in grid.GetNeighbours(currentNode))
-                {
-                    if (!neighbour.walkable || closedSet.Contains(neighbour))
+                    //updating the default cost values & adding parent
+                    float totalCost = node.totalCostToHere + cost;
+                    float neighbourNodeEstCost = HeuristicCost(neighbouringNode, goal);
+
+                    neighbouringNode.totalCostToHere = totalCost;
+                    neighbouringNode.parent = node; //set as successor
+                    neighbouringNode.estimatedCostToTarget = totalCost + neighbourNodeEstCost;
+
+                    if (!openList.Contains(neighbouringNode))
                     {
-                        continue;
-                    }
-
-                    int newMovementCostToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbour);
-                    if (newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
-                    {
-                        neighbour.gCost = newMovementCostToNeighbour;
-                        neighbour.hCost = GetDistance(neighbour, targetNode);
-                        neighbour.parent = currentNode;
-
-                        if (!openSet.Contains(neighbour))
-                            openSet.Add(neighbour);
+                        //add to open list if not there already
+                        openList.Push(neighbouringNode);
                     }
                 }
+                closedList.Add(node);
+                openList.Remove(node);
             }
-        }
-        yield return null;
-        if (pathSuccess)
-        {
-            waypoints = RetracePath(startNode, targetNode);
-        }
-        requestManager.FinishedProcessingPath(waypoints, pathSuccess);
-
-    }
-
-    Vector3[] RetracePath(Node startNode, Node endNode)
-    {
-        List<Node> path = new List<Node>();
-        Node currentNode = endNode;
-
-        while (currentNode != startNode)
-        {
-            path.Add(currentNode);
-            currentNode = currentNode.parent;
-        }
-        Vector3[] waypoints = SimplifyPath(path);
-        Array.Reverse(waypoints);
-        return waypoints;
-
-    }
-
-    Vector3[] SimplifyPath(List<Node> path)
-    {
-        List<Vector3> waypoints = new List<Vector3>();
-        Vector2 directionOld = Vector2.zero;
-
-        for (int i = 1; i < path.Count; i++)
-        {
-            Vector2 directionNew = new Vector2(path[i - 1].gridX - path[i].gridX, path[i - 1].gridY - path[i].gridY);
-            if (directionNew != directionOld)
+            if (node.worldPosition != goal.worldPosition)
             {
-                waypoints.Add(path[i].worldPosition);
+                Debug.Log("Goal not found");
+                return null;
             }
-            directionOld = directionNew;
         }
-        return waypoints.ToArray();
+        return TracePath(node);
     }
 
-    int GetDistance(Node nodeA, Node nodeB)
+    //adding nodes to path list (in correct order)
+    private static ArrayList TracePath(Node node)
     {
-        int dstX = Mathf.Abs(nodeA.gridX - nodeB.gridX);
-        int dstY = Mathf.Abs(nodeA.gridY - nodeB.gridY);
-
-        if (dstX > dstY)
-            return 14 * dstY + 10 * (dstX - dstY);
-        return 14 * dstX + 10 * (dstY - dstX);
+        ArrayList path = new ArrayList();
+        while (node != null)
+        {
+            path.Add(node);
+            node = node.parent;
+        }
+        path.Reverse();
+        return path;
     }
-
-
 }
