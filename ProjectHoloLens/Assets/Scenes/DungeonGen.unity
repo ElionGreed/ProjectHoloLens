@@ -146,15 +146,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 229440761}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab52fa31974722348b0494b1ba36b4ac, type: 3}
+  m_Script: {fileID: 11500000, guid: fef0ed3dff05a554b9cf654b205d6d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dungeonWid: 100
-  dungeonLen: 100
-  RoomWid: 25
-  RoomLen: 25
-  maxIter: 1
-  corridorWid: 5
+  dungeonWidth: 100
+  dungeonLength: 100
+  roomWidthMin: 100
+  roomLengthMin: 100
+  maxIterations: 15
+  corridorWidth: 3
+  material: {fileID: 2100000, guid: b861d27e49afd724286961e0f6a1de52, type: 2}
+  roomBottomCornerModifier: 0.063
+  roomTopCornerMidifier: 0.832
+  roomOffset: 1
+  wallVertical: {fileID: 0}
+  wallHorizontal: {fileID: 0}
 --- !u!4 &229440763
 Transform:
   m_ObjectHideFlags: 0
