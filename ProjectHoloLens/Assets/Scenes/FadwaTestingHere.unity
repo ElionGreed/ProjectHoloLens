@@ -225,6 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c57546908d3c294ea68e6f331a2f2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  start: {fileID: 91380020}
   target: {fileID: 2017846810}
   numOfMoves: 3
 --- !u!1 &112665275
@@ -516,13 +517,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1002802337}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23b6e41a186dc4645807cd36b22b6017, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start: {fileID: 91380020}
-  end: {fileID: 2017846810}
 --- !u!1 &1079154744
 GameObject:
   m_ObjectHideFlags: 0

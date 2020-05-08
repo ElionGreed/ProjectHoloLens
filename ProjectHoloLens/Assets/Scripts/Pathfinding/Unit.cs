@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Unit : MonoBehaviour
 {
+    public Transform start;
     public Transform target;
     float speed = 5;
     Vector3[] path;
@@ -12,7 +13,7 @@ public class Unit : MonoBehaviour
 
     void Start()
     {
-        PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+        PathRequestManager.RequestPath(start.transform.position, target.position, OnPathFound);
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
