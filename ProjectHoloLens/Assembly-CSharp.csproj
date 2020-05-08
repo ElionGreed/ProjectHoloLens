@@ -63,6 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\FogOfWar.cs" />
+    <Compile Include="Assets\GeneralManager.cs" />
     <Compile Include="Assets\Grabbable.cs" />
     <Compile Include="Assets\HoloToolkit-SpatialMapping-230\Input\Scripts\BasicCursor.cs" />
     <Compile Include="Assets\HoloToolkit-SpatialMapping-230\Input\Scripts\GazeManager.cs" />
@@ -95,16 +97,16 @@
     <Compile Include="Assets\Scripts\Interactible.cs" />
     <Compile Include="Assets\Scripts\InteractibleManager.cs" />
     <Compile Include="Assets\Scripts\Other\Smash.cs" />
-    <Compile Include="Assets\Scripts\Pathfinding\Grid.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\GridManager.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Heap.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Lite\Dlite.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Lite\Enemy.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Lite\GridLite.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\Lite\Node(Lite).cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Lite\NodeLite.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\Lite\pathfinding(Lite).cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Lite\PathManager.cs" />
-    <Compile Include="Assets\Scripts\Pathfinding\Node(Lite).cs" />
-    <Compile Include="Assets\Scripts\Pathfinding\Node.cs" />
-    <Compile Include="Assets\Scripts\Pathfinding\pathfinding(Lite).cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\Nodess.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Pathfinding.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\PathRequestManager.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\PriorityQueue.cs" />
