@@ -83,11 +83,9 @@ public class GridManager : MonoBehaviour
                 //int col = GetColumn(cellIndex); print(col);
 
 
-                //information about which cells the obstacles are occupying
+                //-----------------information about which cells the obstacles are occupying--------------
                 int indexCell = GetGridIndex(onbstacle.transform.position);
-                print("obstacle position: " + onbstacle.transform.position);
-
-                print("index of obstacle is" + indexCell); //-1????
+                print("index of obstacle is " + indexCell); //-1????
 
                 int col = GetColumn(indexCell);
                 int row = GetRow(indexCell);
@@ -101,6 +99,7 @@ public class GridManager : MonoBehaviour
                 try
                 {
                     grid[row, col].MarkAsObstacle(); //makes unwalkable = true
+                    print("obstacle marked");
                 }
                 catch (Exception)
                 {
@@ -128,7 +127,7 @@ public class GridManager : MonoBehaviour
         float zPosInGrid = row * gridCellSize;
 
         //positon of cell relative to origin (0) 
-        return Origin + new Vector3(xPosInGrid, 0.0f, zPosInGrid); 
+        return Origin + new Vector3(xPosInGrid, 0.0f, zPosInGrid);
     }
 
     //find grid cell index from the grid position
@@ -140,7 +139,8 @@ public class GridManager : MonoBehaviour
             Debug.Log("position of node is out of bounds");
             return -1;
         }
-        Debug.Log("in bounds yay");
+
+        //Debug.Log("in bounds yay");
         gridPosition -= Origin;
         int col = (int)(gridPosition.x / gridCellSize);
         int row = (int)(gridPosition.z / gridCellSize);
@@ -154,9 +154,9 @@ public class GridManager : MonoBehaviour
         float width = numOfColumns * gridCellSize;
         float height = numOfRows * gridCellSize;
 
-        return (position.x >= Origin.x 
-            && position.x <= Origin.x + width 
-            && position.z <= Origin.x + height 
+        return (position.x >= Origin.x
+            && position.x <= Origin.x + width
+            && position.z <= Origin.x + height
             && position.z >= Origin.z); //if within these bounds return true;
     }
 
@@ -177,32 +177,26 @@ public class GridManager : MonoBehaviour
     //will be used by Pathfinding class to find neighbours of a given node
     public void GetNeighbours(Nodess node, ArrayList neighbours)
     {
-        Vector3 neighbourPos = node.worldPosition; //world position of node 
-        int neighbourIndex = GetGridIndex(neighbourPos); //index of that node
-
-        int row = GetRow(neighbourIndex); //row node is in
-        int column = GetColumn(neighbourIndex); //column node is in
-
-        //going through nodes surround the node on each side and adding them to neighbours
-        //bottom 
+        Vector3 neighbourPos = node.worldPosition;
+        int neighbourIndex = GetGridIndex(neighbourPos);
+        int row = GetRow(neighbourIndex);
+        int column = GetColumn(neighbourIndex);
+        // Bottom 
         int leftNodeRow = row - 1;
-        int leftNodeCol = column;
-        AssignNeighbour(leftNodeRow, leftNodeCol, neighbours);
-
-        //top
+        int leftNodeColumn = column;
+        AssignNeighbour( leftNodeRow, leftNodeColumn, neighbours);
+        // Top 
         leftNodeRow = row + 1;
-        leftNodeCol = column;
-        AssignNeighbour(leftNodeRow, leftNodeCol, neighbours);
-
-        //right 
+        leftNodeColumn = column;
+        AssignNeighbour( leftNodeRow, leftNodeColumn, neighbours);
+        // Right 
+        leftNodeRow = row; 
+        leftNodeColumn = column + 1;
+        AssignNeighbour( leftNodeRow, leftNodeColumn, neighbours);
+        // Left 
         leftNodeRow = row;
-        leftNodeCol = column + 1;
-        AssignNeighbour(leftNodeRow, leftNodeCol, neighbours);
-
-        //left 
-        leftNodeRow = row;
-        leftNodeCol = column - 1;
-        AssignNeighbour(leftNodeRow, leftNodeCol, neighbours);
+        leftNodeColumn = column - 1;
+        AssignNeighbour( leftNodeRow, leftNodeColumn, neighbours);
     }
 
     private void AssignNeighbour(int row, int col, ArrayList neighbours)
@@ -226,18 +220,13 @@ public class GridManager : MonoBehaviour
             catch
             {
                 Debug.Log("Failed to assign neighbour.");
-            }            
+            }
         }
     }
 
 
     void OnDrawGizmos()
     {
-        //if (grid != null)
-        //    print("Grid is not null");
-        //else if (grid == null)
-        //    print("Grid is null yoo");
-
         if (displayGridGizmos)
         {
             DrawGridGizmos(transform.position, numOfRows, numOfColumns, gridCellSize, Color.blue);
@@ -245,37 +234,20 @@ public class GridManager : MonoBehaviour
         //sphere at origin of grid
         Gizmos.DrawSphere(transform.position, 0.5f);
 
-        //if (displayObstaclesGizmos)
-        //{
-        //    Vector3 cellSize = new Vector3(gridCellSize, 1.0f, gridCellSize);
-        //    if (ObstaclesList != null && ObstaclesList.Length > 0)
-        //    {
-        //        //foreach (Nodess n in grid)
-        //        //{
-        //        //    Gizmos.color = (n.unwalkable) ? Color.white : Color.grey;
-        //        //    Gizmos.DrawCube(GetGridCellCentre(GetGridIndex(n.worldPosition)), cellSize);
-        //        //}
+        if (displayObstaclesGizmos)
+        {
 
-        //        foreach (Nodess ob in grid)
-        //        {
-        //            if (ob.unwalkable)
-        //            {
-        //                Gizmos.color = Color.red;
-        //                Gizmos.DrawCube(ob.worldPosition,Vector3.one*1.5f);
-        //            }
-        //            else
-        //            {
-        //                print("no unwalkables");
-        //            }
-        //            //Gizmos.DrawCube(GetGridCellCentre
-        //            //    (GetGridIndex(ob.transform.position)), cellSize);
-
-        //            //Gizmos.DrawCube(
-        //            //GetGridCellCentre(GetGridIndex(ob.transform.position)),
-        //            //cellSize);
-        //        }
-        //    }
-        //}
+            Vector3 cellSize = new Vector3(gridCellSize, 1.0f, gridCellSize);
+            if (ObstaclesList != null && ObstaclesList.Length > 0)
+            {
+                foreach (GameObject obj in ObstaclesList)
+                {
+                    Gizmos.DrawCube(GetGridCellCentre
+                        (GetGridIndex(obj.transform.position)),
+                        cellSize);
+                }
+            }
+        }
     }
 
     private void DrawGridGizmos(Vector3 origin, int numOfRows, int numOfColumns, float CellSize, Color color)
