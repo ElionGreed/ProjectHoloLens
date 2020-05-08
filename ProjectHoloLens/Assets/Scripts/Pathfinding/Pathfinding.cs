@@ -5,86 +5,117 @@ using System;
 
 public class Pathfinding : MonoBehaviour
 {
-    public static PriorityQueue openList;
-    public static HashSet<Nodess> closedList;
+    PathRequestManager requestManager;
+    GridManager grid;
 
-    private static float HeuristicCost(Nodess currentNode, Nodess targetNode)
+    void Awake()
     {
-        Vector3 HeuCost = currentNode.worldPosition - targetNode.worldPosition;
-        return HeuCost.magnitude;
+        requestManager = GetComponent<PathRequestManager>();
+        grid = GetComponent<GridManager>();
     }
 
-    public static ArrayList FindPath(Nodess start, Nodess goal)
+    //BART CALL THIS
+    public void StartFindPath(Vector3 startPos, Vector3 targetPos)
+    { 
+        StartCoroutine(FindPath(startPos, targetPos));
+    }
+
+    IEnumerator FindPath(Vector3 startPos, Vector3 targetPos)
     {
-        //initialise open and closed lists
-        //place start node in open list
-        //process rest of open list
-        openList = new PriorityQueue();
-        openList.Push(start);
-        start.totalCostToHere = 0.0f;
-        start.estimatedCostToTarget = HeuristicCost(start, goal);
 
-        closedList = new HashSet<Nodess>();
-        Nodess node = null;
+        Vector3[] waypoints = new Vector3[0];
+        bool pathSuccess = false;
 
-        while (openList.Length != 0)
+        Nodess startNode = grid.NodeFromWorldPoint(startPos);
+        Nodess targetNode = grid.NodeFromWorldPoint(targetPos);
+
+
+        if (startNode.walkable && targetNode.walkable)
         {
-            node = openList.First(); //node with lowest F
-            //ensure we're not at target node already
-            if (node.worldPosition == goal.worldPosition)
+            Heap<Nodess> openSet = new Heap<Nodess>(grid.MaxSize);
+            HashSet<Nodess> closedSet = new HashSet<Nodess>();
+            openSet.Add(startNode);
+
+            while (openSet.Count > 0)
             {
-                return TracePath(node);
-            }
+                Nodess currentNode = openSet.RemoveFirst();
+                closedSet.Add(currentNode);
 
-            ArrayList neighbours = new ArrayList();
-            GridManager.instance.GetNeighbours(node, neighbours);
-
-            for (int i = 0; i < neighbours.Count; i++)
-            {
-                Nodess neighbouringNode = (Nodess)neighbours[i];
-
-                //if not already in closed list
-                if (!closedList.Contains(neighbouringNode))
+                if (currentNode == targetNode)
                 {
-                    //path cost from node to its neighbours
-                    float cost = HeuristicCost(node, neighbouringNode);
+                    pathSuccess = true;
+                    break;
+                }
 
-                    //updating the default cost values & adding parent
-                    float totalCost = node.totalCostToHere + cost;
-                    float neighbourNodeEstCost = HeuristicCost(neighbouringNode, goal);
-
-                    neighbouringNode.totalCostToHere = totalCost;
-                    neighbouringNode.parent = node; //set as successor
-                    neighbouringNode.estimatedCostToTarget = totalCost + neighbourNodeEstCost;
-
-                    if (!openList.Contains(neighbouringNode))
+                foreach (Nodess neighbour in grid.GetNeighbours(currentNode))
+                {
+                    if (!neighbour.walkable || closedSet.Contains(neighbour))
                     {
-                        //add to open list if not there already
-                        openList.Push(neighbouringNode);
+                        continue;
+                    }
+
+                    int newMovementCostToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbour);
+                    if (newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
+                    {
+                        neighbour.gCost = newMovementCostToNeighbour;
+                        neighbour.hCost = GetDistance(neighbour, targetNode);
+                        neighbour.parent = currentNode;
+
+                        if (!openSet.Contains(neighbour))
+                            openSet.Add(neighbour);
                     }
                 }
-                closedList.Add(node);
-                openList.Remove(node);
-            }
-            if (node.worldPosition != goal.worldPosition)
-            {
-                Debug.Log("Goal not found");
-                return null;
             }
         }
-        return TracePath(node);
+        yield return null;
+        if (pathSuccess)
+        {
+            waypoints = RetracePath(startNode, targetNode);
+        }
+        requestManager.FinishedProcessingPath(waypoints, pathSuccess);
+
     }
 
-    //adding nodes to path list (in correct order)
-    private static ArrayList TracePath(Nodess node)
+    Vector3[] RetracePath(Nodess startNode, Nodess endNode)
     {
-        ArrayList path = new ArrayList();
-        while (node != null)
+        List<Nodess> path = new List<Nodess>();
+        Nodess currentNode = endNode;
+
+        while (currentNode != startNode)
         {
-            path.Add(node);
-            node = node.parent;
+            path.Add(currentNode);
+            currentNode = currentNode.parent;
         }
-        path.Reverse();
-        return path;
+        Vector3[] waypoints = SimplifyPath(path);
+        Array.Reverse(waypoints);
+        return waypoints;
+
+    }
+
+    Vector3[] SimplifyPath(List<Nodess> path)
+    {
+        List<Vector3> waypoints = new List<Vector3>();
+        Vector2 directionOld = Vector2.zero;
+
+        for (int i = 1; i < path.Count; i++)
+        {
+            Vector2 directionNew = new Vector2(path[i - 1].gridX - path[i].gridX, path[i - 1].gridY - path[i].gridY);
+            if (directionNew != directionOld)
+            {
+                waypoints.Add(path[i].worldPosition);
+            }
+            directionOld = directionNew;
+        }
+        return waypoints.ToArray();
+    }
+
+    int GetDistance(Nodess nodeA, Nodess nodeB)
+    {
+        int dstX = Mathf.Abs(nodeA.gridX - nodeB.gridX);
+        int dstY = Mathf.Abs(nodeA.gridY - nodeB.gridY);
+
+        if (dstX > dstY)
+            return 14 * dstY + 10 * (dstX - dstY);
+        return 14 * dstX + 10 * (dstY - dstX);
     }
 }

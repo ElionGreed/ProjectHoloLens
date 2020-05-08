@@ -1,56 +1,54 @@
 ﻿using UnityEngine;
-using System;
+using System.Collections;
 
-public class Nodess : IComparable
+public class Nodess : IHeapItem<Nodess>
 {
-    //total cost (G cost) - distance from start node to this node
-    public float totalCostToHere;
-    //estimated cost (H cost) - estimated distance from this node to target node (manhattan distance)
-    public float estimatedCostToTarget;
-    public bool unwalkable; //obstacle
-    public Nodess parent;
+
+    public bool walkable;
     public Vector3 worldPosition;
+    public int gridX;
+    public int gridY;
 
-    public Nodess()
+    public int gCost;
+    public int hCost;
+    public Nodess parent;
+    int heapIndex;
+
+    public Nodess(bool _walkable, Vector3 _worldPos, int _gridX, int _gridY)
     {
-        this.estimatedCostToTarget = 0.0f;
-        this.totalCostToHere = 1.0f; //had mistake here 0
-        this.unwalkable = false;
-        this.parent = null;
-    }
-    
-    public Nodess(Vector3 pos)
-    {
-        this.estimatedCostToTarget = 0.0f;
-        this.totalCostToHere = 1.0f;
-        this.unwalkable = false;
-        this.parent = null;
-        this.worldPosition = pos;
+        walkable = _walkable;
+        worldPosition = _worldPos;
+        gridX = _gridX;
+        gridY = _gridY;
     }
 
-    public void MarkAsObstacle()
+    public int fCost
     {
-        this.unwalkable = true;
+        get
+        {
+            return gCost + hCost;
+        }
     }
 
-    //public float TotalCost
-    //{
-    //    get
-    //    {
-    //        return estimatedCostToTarget + totalCostToHere;
-    //    }
-    //}
-
-    //compare costs to sort nodes in queue (sort function will look for compareto().
-    public int CompareTo(object obj)
+    public int HeapIndex
     {
-        Nodess node = (Nodess)obj;
-        
-        //if this node should be lower in queue (lower cost) than obj, return -1
-        if (this.estimatedCostToTarget < node.estimatedCostToTarget) return - 1;
+        get
+        {
+            return heapIndex;
+        }
+        set
+        {
+            heapIndex = value;
+        }
+    }
 
-        if (this.estimatedCostToTarget > node.estimatedCostToTarget) return 1;
-
-        return 0;
+    public int CompareTo(Nodess nodeToCompare)
+    {
+        int compare = fCost.CompareTo(nodeToCompare.fCost);
+        if (compare == 0)
+        {
+            compare = hCost.CompareTo(nodeToCompare.hCost);
+        }
+        return -compare;
     }
 }

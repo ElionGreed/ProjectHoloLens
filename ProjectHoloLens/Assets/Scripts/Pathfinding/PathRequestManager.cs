@@ -1,91 +1,62 @@
-﻿using System;
+﻿using UnityEngine;
 using System.Collections;
-using UnityEngine;
+using System.Collections.Generic;
+using System;
 
 public class PathRequestManager : MonoBehaviour
 {
-    [SerializeField]
-    public Transform startPos, endPos;
-    public Nodess startNode { get; set; }
-    public Nodess goalNode { get; set; }
 
-    //array found from findpath()
-    public ArrayList pathArray;
-    public int numOfMoves =5;
-    public int speed=20;
+    Queue<PathRequest> pathRequestQueue = new Queue<PathRequest>();
+    PathRequest currentPathRequest;
 
-    //GameObject objStartCube, objEndCube;
-    GameObject startObj, endObj;
-    private float elapsedTime = 0.0f;
-    public float intervalTime = 1.0f;
+    static PathRequestManager instance;
+    Pathfinding pathfinding;
 
-    private void Start()
+    bool isProcessingPath;
+
+    void Awake()
     {
-        startObj = GameObject.FindGameObjectWithTag("Start");
-        endObj = GameObject.FindGameObjectWithTag("End");
-
-        pathArray = new ArrayList();
-        FindPath();
+        instance = this;
+        pathfinding = GetComponent<Pathfinding>();
     }
 
-    private void Update()
+    public static void RequestPath(Vector3 pathStart, Vector3 pathEnd, Action<Vector3[], bool> callback)
     {
-        elapsedTime += Time.deltaTime;
-        if (elapsedTime >= intervalTime)
+        PathRequest newRequest = new PathRequest(pathStart, pathEnd, callback);
+        instance.pathRequestQueue.Enqueue(newRequest);
+        instance.TryProcessNext();
+    }
+
+    void TryProcessNext()
+    {
+        if (!isProcessingPath && pathRequestQueue.Count > 0)
         {
-            elapsedTime = 0.0f;
-            //*******DON'T UPDATE IF WE GOING TURN-BASED
-            FindPath();
+            currentPathRequest = pathRequestQueue.Dequeue();
+            isProcessingPath = true;
+            //FUNCTION THAT RUNS PATHFINDING - BART CALL THIS
+            pathfinding.StartFindPath(currentPathRequest.pathStart, currentPathRequest.pathEnd);
         }
     }
 
-    public void MoveUnit(GameObject unit, int _numOfMoves)
+    public void FinishedProcessingPath(Vector3[] path, bool success)
     {
-        //Node currentNode = (Node) pathArray[0];
-
-        //for (int i = 0; i < numOfMoves; i++)
-        //{
-        //    if (startObj.transform.position != endObj.transform.position)
-        //    {
-        //        currentNode = (Node) pathArray[i];
-        //    }
-        //    Vector3 currentNodePos = currentNode.worldPosition;
-        //    startObj.transform.position = Vector3.MoveTowards(transform.position, currentNodePos, speed);
-        //}
+        currentPathRequest.callback(path, success);
+        isProcessingPath = false;
+        TryProcessNext();
     }
 
-    private void FindPath()
+    struct PathRequest
     {
-        startPos = startObj.transform;
-        endPos = endObj.transform;
-        startNode = new Nodess(GridManager.instance.GetGridCellCentre
-            (GridManager.instance.GetGridIndex(startPos.position)));
-        goalNode = new Nodess(GridManager.instance.GetGridCellCentre
-            (GridManager.instance.GetGridIndex(endPos.position)));
+        public Vector3 pathStart;
+        public Vector3 pathEnd;
+        public Action<Vector3[], bool> callback;
 
-        pathArray = Pathfinding.FindPath(startNode, goalNode);
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (pathArray == null)
+        public PathRequest(Vector3 _start, Vector3 _end, Action<Vector3[], bool> _callback)
         {
-            return;
+            pathStart = _start;
+            pathEnd = _end;
+            callback = _callback;
         }
 
-        if (pathArray.Count > 0)
-        {
-            int index = 1;
-            foreach(Nodess node in pathArray)
-            {
-                if (index < pathArray.Count)
-                {
-                    Nodess nextNode = (Nodess)pathArray[index];
-                    Gizmos.color = Color.red;
-                    Gizmos.DrawLine(node.worldPosition, nextNode.worldPosition);
-                    index++;
-                }
-            }
-        }
     }
 }
