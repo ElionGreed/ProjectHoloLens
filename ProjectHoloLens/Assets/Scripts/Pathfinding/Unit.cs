@@ -13,7 +13,7 @@ public class Unit : MonoBehaviour
 
     void Start()
     {
-        PathRequestManager.RequestPath(start.transform.position, target.position, OnPathFound);
+        //PathRequestManager.RequestPath(start.transform.position, target.position, OnPathFound);
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
@@ -45,7 +45,6 @@ public class Unit : MonoBehaviour
 
             transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
             yield return null;
-
         }
     }
 

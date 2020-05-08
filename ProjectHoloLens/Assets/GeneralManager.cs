@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class GeneralManager : MonoBehaviour
 {
-    //public Transform start, end;
-    //Unit unit;
-    //void Start()
-    //{
-    //    unit = GetComponent<Unit>();
+    public GameObject unitTest;
+    public Transform start, end;
+    Unit unit;
+    void Start()
+    {
+        unit = unitTest.GetComponent<Unit>();
 
-    //    //PathRequestManager.RequestPath(start.position, end.position, unit.OnPathFound);
-    //}
+        PathRequestManager.RequestPath(start.position, end.position, unit.OnPathFound);
+    }
 }
