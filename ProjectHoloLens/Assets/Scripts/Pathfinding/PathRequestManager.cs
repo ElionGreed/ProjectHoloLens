@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PathRequestManager : MonoBehaviour
 {
-    private Transform startPos, endPos;
-    public Nodes startNode { get; set; }
-    public Nodes goalNode { get; set; }
+    [SerializeField]
+    public Transform startPos, endPos;
+    public Nodess startNode { get; set; }
+    public Nodess goalNode { get; set; }
 
     //array found from findpath()
     public ArrayList pathArray;
@@ -33,12 +34,12 @@ public class PathRequestManager : MonoBehaviour
         if (elapsedTime >= intervalTime)
         {
             elapsedTime = 0.0f;
-            //*******DON'T UPDATE IF WE GOING TURN_BASED
-            //FindPath();
+            //*******DON'T UPDATE IF WE GOING TURN-BASED
+            FindPath();
         }
     }
 
-    public void MoveUnit(GameObject unit)
+    public void MoveUnit(GameObject unit, int _numOfMoves)
     {
         //Node currentNode = (Node) pathArray[0];
 
@@ -57,10 +58,10 @@ public class PathRequestManager : MonoBehaviour
     {
         startPos = startObj.transform;
         endPos = endObj.transform;
-        startNode = new Nodes(Grid.instance.GetGridCellCentre
-            (Grid.instance.GetGridIndex(startPos.position)));
-        goalNode = new Nodes(Grid.instance.GetGridCellCentre
-            (Grid.instance.GetGridIndex(endPos.position)));
+        startNode = new Nodess(GridManager.instance.GetGridCellCentre
+            (GridManager.instance.GetGridIndex(startPos.position)));
+        goalNode = new Nodess(GridManager.instance.GetGridCellCentre
+            (GridManager.instance.GetGridIndex(endPos.position)));
 
         pathArray = Pathfinding.FindPath(startNode, goalNode);
     }
@@ -75,11 +76,11 @@ public class PathRequestManager : MonoBehaviour
         if (pathArray.Count > 0)
         {
             int index = 1;
-            foreach(Nodes node in pathArray)
+            foreach(Nodess node in pathArray)
             {
                 if (index < pathArray.Count)
                 {
-                    Nodes nextNode = (Nodes)pathArray[index];
+                    Nodess nextNode = (Nodess)pathArray[index];
                     Gizmos.color = Color.red;
                     Gizmos.DrawLine(node.worldPosition, nextNode.worldPosition);
                     index++;

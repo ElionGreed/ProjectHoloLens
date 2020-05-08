@@ -1,25 +1,25 @@
 ﻿using UnityEngine;
 using System;
 
-public class Nodes : IComparable
+public class Nodess : IComparable
 {
     //total cost (G cost) - distance from start node to this node
     public float totalCostToHere;
     //estimated cost (H cost) - estimated distance from this node to target node (manhattan distance)
     public float estimatedCostToTarget;
     public bool unwalkable; //obstacle
-    public Nodes parent;
+    public Nodess parent;
     public Vector3 worldPosition;
 
-    public Nodes()
+    public Nodess()
     {
         this.estimatedCostToTarget = 0.0f;
-        this.totalCostToHere = 0.0f;
+        this.totalCostToHere = 1.0f; //had mistake here 0
         this.unwalkable = false;
         this.parent = null;
     }
     
-    public Nodes(Vector3 pos)
+    public Nodess(Vector3 pos)
     {
         this.estimatedCostToTarget = 0.0f;
         this.totalCostToHere = 1.0f;
@@ -44,14 +44,12 @@ public class Nodes : IComparable
     //compare costs to sort nodes in queue (sort function will look for compareto().
     public int CompareTo(object obj)
     {
-        Nodes node = (Nodes)obj;
+        Nodess node = (Nodess)obj;
         
         //if this node should be lower in queue (lower cost) than obj, return -1
-        if (this.estimatedCostToTarget < node.estimatedCostToTarget)
-            return - 1;
+        if (this.estimatedCostToTarget < node.estimatedCostToTarget) return - 1;
 
-        if (this.estimatedCostToTarget > node.estimatedCostToTarget)
-            return 1;
+        if (this.estimatedCostToTarget > node.estimatedCostToTarget) return 1;
 
         return 0;
     }

@@ -6,15 +6,15 @@ using System;
 public class Pathfinding : MonoBehaviour
 {
     public static PriorityQueue openList;
-    public static HashSet<Nodes> closedList;
+    public static HashSet<Nodess> closedList;
 
-    private static float HeuristicCost(Nodes currentNode, Nodes targetNode)
+    private static float HeuristicCost(Nodess currentNode, Nodess targetNode)
     {
         Vector3 HeuCost = currentNode.worldPosition - targetNode.worldPosition;
         return HeuCost.magnitude;
     }
 
-    public static ArrayList FindPath(Nodes start, Nodes goal)
+    public static ArrayList FindPath(Nodess start, Nodess goal)
     {
         //initialise open and closed lists
         //place start node in open list
@@ -24,8 +24,8 @@ public class Pathfinding : MonoBehaviour
         start.totalCostToHere = 0.0f;
         start.estimatedCostToTarget = HeuristicCost(start, goal);
 
-        closedList = new HashSet<Nodes>();
-        Nodes node = null;
+        closedList = new HashSet<Nodess>();
+        Nodess node = null;
 
         while (openList.Length != 0)
         {
@@ -37,11 +37,11 @@ public class Pathfinding : MonoBehaviour
             }
 
             ArrayList neighbours = new ArrayList();
-            Grid.instance.GetNeighbours(node, neighbours);
+            GridManager.instance.GetNeighbours(node, neighbours);
 
             for (int i = 0; i < neighbours.Count; i++)
             {
-                Nodes neighbouringNode = (Nodes)neighbours[i];
+                Nodess neighbouringNode = (Nodess)neighbours[i];
 
                 //if not already in closed list
                 if (!closedList.Contains(neighbouringNode))
@@ -76,7 +76,7 @@ public class Pathfinding : MonoBehaviour
     }
 
     //adding nodes to path list (in correct order)
-    private static ArrayList TracePath(Nodes node)
+    private static ArrayList TracePath(Nodess node)
     {
         ArrayList path = new ArrayList();
         while (node != null)
