@@ -14,7 +14,6 @@ public class CompanionAI : MonoBehaviour
     float damage = 10;
     float distance;
     NavMeshAgent agent;
-    GameObject[] enemy;
     [SerializeField]
     GameObject player;
     [SerializeField]
@@ -33,13 +32,12 @@ public class CompanionAI : MonoBehaviour
     void FixedUpdate()
     {
         
-        enemy = GameObject.FindGameObjectsWithTag("Enemy");
-        CalculateUtility();
+        
+       // CalculateUtility();
     }
     private void CalculateUtility()
     {
-
-        //orcScipt = enemy[0].GetComponent<OrcScript>();
+      
 
         utilityValues[0] = 0;  // Death Value
         if (companionHealth < 1)
@@ -48,12 +46,12 @@ public class CompanionAI : MonoBehaviour
         }
         utilityValues[1] = 100/companionHealth;  // Run Away Value
         utilityValues[2] = 0;
-        if (enemy.Length != 0)
+        if (UnitManager.unitManager.enemyUnits.Count != 0)
         {
-            utilityValues[2] = 100 / (enemy.Length*4); // Attack Value
+            utilityValues[2] = 100 / (UnitManager.unitManager.enemyUnits.Count*4); // Attack Value
         }
         utilityValues[3] = 0;// Follow Value
-        if (enemy.Length == 0)
+        if (UnitManager.unitManager.enemyUnits.Count == 0)
         {
             utilityValues[0] = 0; // if there are no enemies respawn and follow player
             utilityValues[3] = 999;
@@ -113,7 +111,7 @@ public class CompanionAI : MonoBehaviour
     private void AttackEnemy()
     {
         agent.isStopped = false;
-        agent.SetDestination(enemy[0].transform.position);
+        agent.SetDestination(UnitManager.unitManager.enemyUnits[0].transform.position);
     }
     private void Follow()
     {
