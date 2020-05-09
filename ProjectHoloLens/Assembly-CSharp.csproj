@@ -63,7 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\FogOfWar.cs" />
     <Compile Include="Assets\GeneralManager.cs" />
     <Compile Include="Assets\Grabbable.cs" />
     <Compile Include="Assets\HoloToolkit-SpatialMapping-230\Input\Scripts\BasicCursor.cs" />
@@ -80,20 +79,24 @@
     <Compile Include="Assets\HoloToolkit-SpatialMapping-230\SpatialMapping\Scripts\SurfacePlane.cs" />
     <Compile Include="Assets\HoloToolkit-SpatialMapping-230\Utilities\Scripts\Singleton.cs" />
     <Compile Include="Assets\MovePlayer.cs" />
+    <Compile Include="Assets\Scripts\AI\CommonUnit.cs" />
     <Compile Include="Assets\Scripts\AI\CompanionAI.cs" />
+    <Compile Include="Assets\Scripts\AI\EnemyUnit.cs" />
     <Compile Include="Assets\Scripts\AI\OrcScript.cs" />
     <Compile Include="Assets\Scripts\AI\PlayerCharacter.cs" />
+    <Compile Include="Assets\Scripts\AI\PlayerUnit.cs" />
+    <Compile Include="Assets\Scripts\AI\RedundantStateMachine.cs" />
     <Compile Include="Assets\Scripts\AI\StateMachine.cs" />
-    <Compile Include="Assets\Scripts\DungeonGen\BinarySpacePartitioner.cs" />
-    <Compile Include="Assets\Scripts\DungeonGen\CorridorNode.cs" />
-    <Compile Include="Assets\Scripts\DungeonGen\CorridorsGenerator.cs" />
-    <Compile Include="Assets\Scripts\DungeonGen\DugeonGenerator.cs" />
-    <Compile Include="Assets\Scripts\DungeonGen\DungeonCreator.cs" />
-    <Compile Include="Assets\Scripts\DungeonGen\Line.cs" />
-    <Compile Include="Assets\Scripts\DungeonGen\Node.cs" />
-    <Compile Include="Assets\Scripts\DungeonGen\RoomGenerator.cs" />
-    <Compile Include="Assets\Scripts\DungeonGen\RoomNode.cs" />
-    <Compile Include="Assets\Scripts\DungeonGen\StructureHelper.cs" />
+    <Compile Include="Assets\Scripts\AI\TurnManager.cs" />
+    <Compile Include="Assets\Scripts\AI\UnitManager.cs" />
+    <Compile Include="Assets\Scripts\DungeonGen\Doorway.cs" />
+    <Compile Include="Assets\Scripts\DungeonGen\DungeonGen.cs" />
+    <Compile Include="Assets\Scripts\DungeonGen\DungeonGenerations.cs" />
+    <Compile Include="Assets\Scripts\DungeonGen\EndRoom.cs" />
+    <Compile Include="Assets\Scripts\DungeonGen\Room.cs" />
+    <Compile Include="Assets\Scripts\DungeonGen\StartRoom.cs" />
+    <Compile Include="Assets\Scripts\FogOfWar.cs" />
+    <Compile Include="Assets\Scripts\HealthPowerUps.cs" />
     <Compile Include="Assets\Scripts\Interactible.cs" />
     <Compile Include="Assets\Scripts\InteractibleManager.cs" />
     <Compile Include="Assets\Scripts\Other\Smash.cs" />
@@ -112,6 +115,8 @@
     <Compile Include="Assets\Scripts\Pathfinding\PriorityQueue.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Unit.cs" />
     <Compile Include="Assets\Scripts\PlaceableScript.cs" />
+    <Compile Include="Assets\Scripts\PlayerCon.cs" />
+    <Compile Include="Assets\Scripts\PlayerSpawnController.cs" />
     <Compile Include="Assets\Scripts\ProceduralGenerationScripts\MapDisplay.cs" />
     <Compile Include="Assets\Scripts\ProceduralGenerationScripts\MapGenerate.cs" />
     <Compile Include="Assets\Scripts\ProceduralGenerationScripts\MapGeneratorEditor.cs" />
@@ -119,6 +124,8 @@
     <Compile Include="Assets\Scripts\ProceduralGenerationScripts\Noise.cs" />
     <Compile Include="Assets\Scripts\ProceduralGenerationScripts\TerrainGeneration.cs" />
     <Compile Include="Assets\Scripts\ProceduralGenerationScripts\TextureGeneration.cs" />
+    <Compile Include="Assets\Scripts\SpeedPowerUp.cs" />
+    <Compile Include="Assets\Scripts\TestScriptHealthDeleteAfter.cs" />
     <None Include="Assets\Scripts\Pathfinding\ReadMe+Reference.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
