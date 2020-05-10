@@ -14,7 +14,6 @@ public class Pathfinding : MonoBehaviour
         grid = GetComponent<GridManager>();
     }
 
-    //BART CALL THIS
     public void StartFindPath(Vector3 startPos, Vector3 targetPos)
     { 
         StartCoroutine(FindPath(startPos, targetPos));
@@ -89,7 +88,6 @@ public class Pathfinding : MonoBehaviour
         Vector3[] waypoints = SimplifyPath(path);
         Array.Reverse(waypoints);
         return waypoints;
-
     }
 
     Vector3[] SimplifyPath(List<Nodess> path)
