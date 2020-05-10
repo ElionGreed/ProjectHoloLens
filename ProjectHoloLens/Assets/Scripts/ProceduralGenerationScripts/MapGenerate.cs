@@ -33,6 +33,11 @@ public class MapGenerate : MonoBehaviour
 
     public TerrainType[] regions;
 
+    public void Start()
+    {
+        GenerateMap();
+    }
+
     public void GenerateMap()
     {
         float[,] noiseMap = Noise.GenerateNoiseMap(MapChunk, MapChunk, seed, noiseScale, octaves, persistance, lacunarity, offset);
