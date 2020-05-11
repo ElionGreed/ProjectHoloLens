@@ -37,5 +37,6 @@ public class IngameMenu : MonoBehaviour
         panelGameover.SetActive(false);
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("MainScene");
+        panelGameover.SetActive(false);
     }
 }
