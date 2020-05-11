@@ -11,13 +11,13 @@ public class GridManager : MonoBehaviour
     public Nodess[,] grid;
 
     float nodeDiameter;
-    int gridSizeX, gridSizeY;
+    int gridWidth, gridHeight;
 
     void Awake()
     {
         nodeDiameter = nodeRadius * 2;
-        gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
-        gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
+        gridWidth = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
+        gridHeight = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
         CreateGrid();
     }
 
@@ -25,32 +25,36 @@ public class GridManager : MonoBehaviour
     {
         get
         {
-            return gridSizeX * gridSizeY;
+            return gridWidth * gridHeight;
         }
     }
 
     void CreateGrid()
     {
-        grid = new Nodess[gridSizeX, gridSizeY];
-        Vector3 worldBottomLeft = transform.position - Vector3.right * gridWorldSize.x / 2 - Vector3.forward * gridWorldSize.y / 2;
+        grid = new Nodess[gridWidth, gridHeight];
+        //start creating from origin (bottom left corner)
+        Vector3 gridOrigin = transform.position - Vector3.right * gridWorldSize.x / 2 - Vector3.forward * gridWorldSize.y / 2;
 
-        for (int x = 0; x < gridSizeX; x++)
+        for (int x = 0; x < gridWidth; x++)
         {
-            for (int y = 0; y < gridSizeY; y++)
+            for (int y = 0; y < gridHeight; y++)
             {
-                Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
+                Vector3 worldPoint = gridOrigin + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
                 bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask));
                 grid[x, y] = new Nodess(walkable, worldPoint, x, y);
             }
         }
     }
 
+    //get neighbours of a node
     public List<Nodess> GetNeighbours(Nodess node)
     {
         List<Nodess> neighbours = new List<Nodess>();
 
+        //check positions around given node on x (1, 0, -1)
         for (int x = -1; x <= 1; x++)
         {
+            //check positions around given node on y (1, 0, -1)
             for (int y = -1; y <= 1; y++)
             {
                 if (x == 0 && y == 0)
@@ -59,25 +63,31 @@ public class GridManager : MonoBehaviour
                 int checkX = node.gridX + x;
                 int checkY = node.gridY + y;
 
-                if (checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY)
+                //if x and y position are within the bounds of the grid, add the node to neighbours list
+                if (checkX >= 0 && checkX < gridWidth && checkY >= 0 && checkY < gridHeight)
                 {
                     neighbours.Add(grid[checkX, checkY]);
                 }
             }
         }
-
         return neighbours;
     }
 
-    public Nodess NodeFromWorldPoint(Vector3 worldPosition)
+    //get the position of the node in the grid array based on its position in the world
+    public Nodess GetNodeFromWorldPos(Vector3 worldPos)
     {
-        float percentX = (worldPosition.x + gridWorldSize.x / 2) / gridWorldSize.x;
-        float percentY = (worldPosition.z + gridWorldSize.y / 2) / gridWorldSize.y;
+        //how far node is along gridworldslize as %
+        //percentage  = (worlspos + 1/2 grid world size) / world size
+        float percentX = (worldPos.x + gridWorldSize.x / 2) / gridWorldSize.x;
+        float percentY = (worldPos.z + gridWorldSize.y / 2) / gridWorldSize.y;
+
+        //clamp b/w 0-1 to ensure world no faulty values are entered into grid[,]
         percentX = Mathf.Clamp01(percentX);
         percentY = Mathf.Clamp01(percentY);
 
-        int x = Mathf.RoundToInt((gridSizeX - 1) * percentX);
-        int y = Mathf.RoundToInt((gridSizeY - 1) * percentY);
+        //(-1 to account for array index starting at 0
+        int x = Mathf.RoundToInt((gridWidth - 1) * percentX);
+        int y = Mathf.RoundToInt((gridHeight - 1) * percentY);
         return grid[x, y];
     }
 

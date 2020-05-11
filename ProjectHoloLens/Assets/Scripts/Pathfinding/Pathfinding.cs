@@ -37,8 +37,8 @@ public class Pathfinding : MonoBehaviour
         bool pathSuccess = false;
 
 
-        Nodess startNode = grid.NodeFromWorldPoint(startPos);
-        Nodess targetNode = grid.NodeFromWorldPoint(targetPos);
+        Nodess startNode = grid.GetNodeFromWorldPos(startPos);
+        Nodess targetNode = grid.GetNodeFromWorldPos(targetPos);
 
         //ensure both nodes are walkable
         if (startNode.walkable && targetNode.walkable)
@@ -73,14 +73,14 @@ public class Pathfinding : MonoBehaviour
                     }
 
                     //cost from current node to neighbour = current node's g cost + est manhattan distance
-                    int newMovementCostToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbour);
+                    int newMovementCostToNeighbour = currentNode.totalCostToHere + GetDistance(currentNode, neighbour);
 
                     //if the cost to neighbour is less than the neighbour's g cost, and neighbour isn't in open list
-                    if (newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
+                    if (newMovementCostToNeighbour < neighbour.totalCostToHere || !openSet.Contains(neighbour))
                     {
                         //set default properties of the neighbouring node 
-                        neighbour.gCost = newMovementCostToNeighbour;
-                        neighbour.hCost = GetDistance(neighbour, targetNode);
+                        neighbour.totalCostToHere = newMovementCostToNeighbour;
+                        neighbour.estimatedCostToTarget = GetDistance(neighbour, targetNode);
                         neighbour.parent = currentNode;
 
                         //add neighbour to open list
@@ -95,11 +95,8 @@ public class Pathfinding : MonoBehaviour
 
         if (pathSuccess)
         {
-            //waypoints = RetracePath(startNode, targetNode);
             pathInV3 = RetracePath(startNode, targetNode);
         }
-
-        //requestManager.FinishedProcessingPath(waypoints, pathSuccess);
         requestManager.FinishedProcessingPath(pathInV3, pathSuccess);
     }
 
@@ -129,13 +126,13 @@ public class Pathfinding : MonoBehaviour
 
     Vector3[] pathToV3(List<Nodess> path)
     {
-        //path in nodess
         List<Vector3> pathV3 = new List<Vector3>();
+
         for (int i = 0; i < path.Count; i++)
         {
+            //add each node's world position to pathv3
             pathV3.Add(path[i].worldPosition);
         }
-
         return pathV3.ToArray();
     }
 }
