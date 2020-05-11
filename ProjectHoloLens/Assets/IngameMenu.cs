@@ -27,6 +27,7 @@ public class IngameMenu : MonoBehaviour
 
     public void TryAgain()
     {
+        print("clicked");
         StartCoroutine(LoadingWait());
     }
 
