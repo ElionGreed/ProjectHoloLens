@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class MovePlayer : MonoBehaviour
 {
-
     public Vector3 targetPosition;
     Vector3 lookAtTarget;
     Quaternion playerRotation;
