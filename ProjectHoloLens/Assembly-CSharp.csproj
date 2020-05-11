@@ -79,11 +79,13 @@
     <Compile Include="Assets\HoloToolkit-SpatialMapping-230\SpatialMapping\Scripts\SurfaceMeshesToPlanes.cs" />
     <Compile Include="Assets\HoloToolkit-SpatialMapping-230\SpatialMapping\Scripts\SurfacePlane.cs" />
     <Compile Include="Assets\HoloToolkit-SpatialMapping-230\Utilities\Scripts\Singleton.cs" />
-    <Compile Include="Assets\IngameMenu.cs" />
-    <Compile Include="Assets\MoveCamera.cs" />
+    <Compile Include="Assets\LoadDungeon.cs" />
     <Compile Include="Assets\MovePlayer.cs" />
+    <Compile Include="Assets\Prefabs\Prefab_Menu\IngameMenu.cs" />
+    <Compile Include="Assets\Prefabs\Prefab_Menu\MoveCamera.cs" />
     <Compile Include="Assets\Scripts\AI\CommonUnit.cs" />
     <Compile Include="Assets\Scripts\AI\CompanionAI.cs" />
+    <Compile Include="Assets\Scripts\AI\CompanionUnit.cs" />
     <Compile Include="Assets\Scripts\AI\EnemyUnit.cs" />
     <Compile Include="Assets\Scripts\AI\OrcScript.cs" />
     <Compile Include="Assets\Scripts\AI\PlayerCharacter.cs" />
@@ -119,6 +121,7 @@
     <Compile Include="Assets\Scripts\Pathfinding\PathRequestManager.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\PriorityQueue.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Unit.cs" />
+    <Compile Include="Assets\Scripts\pickupskills.cs" />
     <Compile Include="Assets\Scripts\PlaceableScript.cs" />
     <Compile Include="Assets\Scripts\PlayerCon.cs" />
     <Compile Include="Assets\Scripts\PlayerSpawnController.cs" />
@@ -129,6 +132,10 @@
     <Compile Include="Assets\Scripts\ProceduralGenerationScripts\Noise.cs" />
     <Compile Include="Assets\Scripts\ProceduralGenerationScripts\TerrainGeneration.cs" />
     <Compile Include="Assets\Scripts\ProceduralGenerationScripts\TextureGeneration.cs" />
+    <Compile Include="Assets\Scripts\ScoringSystem\CalculateScore.cs" />
+    <Compile Include="Assets\Scripts\ScoringSystem\CountKill.cs" />
+    <Compile Include="Assets\Scripts\ScoringSystem\GameControl.cs" />
+    <Compile Include="Assets\Scripts\ScoringSystem\HighScore.cs" />
     <Compile Include="Assets\Scripts\SpeedPowerUp.cs" />
     <Compile Include="Assets\Scripts\TestScriptHealthDeleteAfter.cs" />
     <None Include="Assets\Scripts\Pathfinding\ReadMe+Reference.txt" />
