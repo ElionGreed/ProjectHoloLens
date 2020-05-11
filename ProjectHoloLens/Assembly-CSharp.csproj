@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Assets\GeneralManager.cs" />
     <Compile Include="Assets\Grabbable.cs" />
+    <Compile Include="Assets\HealthIndicator.cs" />
     <Compile Include="Assets\HoloToolkit-SpatialMapping-230\Input\Scripts\BasicCursor.cs" />
     <Compile Include="Assets\HoloToolkit-SpatialMapping-230\Input\Scripts\GazeManager.cs" />
     <Compile Include="Assets\HoloToolkit-SpatialMapping-230\Input\Scripts\GestureManager.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Assets\HoloToolkit-SpatialMapping-230\SpatialMapping\Scripts\SurfaceMeshesToPlanes.cs" />
     <Compile Include="Assets\HoloToolkit-SpatialMapping-230\SpatialMapping\Scripts\SurfacePlane.cs" />
     <Compile Include="Assets\HoloToolkit-SpatialMapping-230\Utilities\Scripts\Singleton.cs" />
+    <Compile Include="Assets\IngameMenu.cs" />
     <Compile Include="Assets\MovePlayer.cs" />
     <Compile Include="Assets\Scripts\AI\CommonUnit.cs" />
     <Compile Include="Assets\Scripts\AI\CompanionAI.cs" />
@@ -99,6 +101,8 @@
     <Compile Include="Assets\Scripts\HealthPowerUps.cs" />
     <Compile Include="Assets\Scripts\Interactible.cs" />
     <Compile Include="Assets\Scripts\InteractibleManager.cs" />
+    <Compile Include="Assets\Scripts\ISceneTransitionService.cs" />
+    <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Other\Smash.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\GridManager.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Heap.cs" />
