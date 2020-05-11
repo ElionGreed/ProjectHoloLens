@@ -340,8 +340,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 511476877}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12, y: 18.79, z: 5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 5.283, y: 0, z: 1.077}
+  m_LocalScale: {x: 2.6449358, y: 1, z: 4.3990736}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -440,7 +440,7 @@ GameObject:
   - component: {fileID: 785791115}
   - component: {fileID: 785791114}
   m_Layer: 0
-  m_Name: DungeonGen
+  m_Name: DungeonGen Floor 1
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -469,7 +469,7 @@ MonoBehaviour:
   - {fileID: 6114838495642789635, guid: 41872a542c7b77a4389a47a8918d791d, type: 3}
   - {fileID: 456538516}
   - {fileID: 1143278650}
-  iterationRange: {x: 10, y: 15}
+  iterationRange: {x: 5, y: 15}
   playerPrefab: {fileID: 0}
 --- !u!4 &785791115
 Transform:
