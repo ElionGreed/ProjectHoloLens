@@ -80,6 +80,7 @@
     <Compile Include="Assets\HoloToolkit-SpatialMapping-230\SpatialMapping\Scripts\SurfacePlane.cs" />
     <Compile Include="Assets\HoloToolkit-SpatialMapping-230\Utilities\Scripts\Singleton.cs" />
     <Compile Include="Assets\IngameMenu.cs" />
+    <Compile Include="Assets\MoveCamera.cs" />
     <Compile Include="Assets\MovePlayer.cs" />
     <Compile Include="Assets\Scripts\AI\CommonUnit.cs" />
     <Compile Include="Assets\Scripts\AI\CompanionAI.cs" />
