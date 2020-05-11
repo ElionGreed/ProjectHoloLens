@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class GridManager : MonoBehaviour
 {
-
     public bool displayGridGizmos;
     public LayerMask unwalkableMask;
     public Vector2 gridWorldSize;
@@ -69,7 +68,6 @@ public class GridManager : MonoBehaviour
 
         return neighbours;
     }
-
 
     public Nodess NodeFromWorldPoint(Vector3 worldPosition)
     {

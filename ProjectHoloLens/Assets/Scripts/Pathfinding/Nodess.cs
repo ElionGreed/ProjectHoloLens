@@ -3,13 +3,14 @@ using System.Collections;
 
 public class Nodess : IHeapItem<Nodess>
 {
-
     public bool walkable;
     public Vector3 worldPosition;
     public int gridX;
     public int gridY;
 
+    //cost from start to current node (cost-so-far)
     public int gCost;
+    //cost from current node to goal (cost-to-go)
     public int hCost;
     public Nodess parent;
     int heapIndex;
@@ -21,7 +22,7 @@ public class Nodess : IHeapItem<Nodess>
         gridX = _gridX;
         gridY = _gridY;
     }
-
+    
     public int fCost
     {
         get
@@ -42,9 +43,11 @@ public class Nodess : IHeapItem<Nodess>
         }
     }
 
+    //compare f cost of nodes to 
     public int CompareTo(Nodess nodeToCompare)
     {
         int compare = fCost.CompareTo(nodeToCompare.fCost);
+        //if fcosts of nodes are equal (no difference in total distance), compare the h cost
         if (compare == 0)
         {
             compare = hCost.CompareTo(nodeToCompare.hCost);

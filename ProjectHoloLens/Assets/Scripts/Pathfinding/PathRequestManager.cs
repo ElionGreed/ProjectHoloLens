@@ -5,7 +5,6 @@ using System;
 
 public class PathRequestManager : MonoBehaviour
 {
-
     Queue<PathRequest> pathRequestQueue = new Queue<PathRequest>();
     PathRequest currentPathRequest;
 
@@ -33,7 +32,7 @@ public class PathRequestManager : MonoBehaviour
         {
             currentPathRequest = pathRequestQueue.Dequeue();
             isProcessingPath = true;
-            //FUNCTION THAT RUNS PATHFINDING - BART CALL THIS
+            //returns path
             pathfinding.StartFindPath(currentPathRequest.pathStart, currentPathRequest.pathEnd);
         }
     }
@@ -42,6 +41,7 @@ public class PathRequestManager : MonoBehaviour
     {
         currentPathRequest.callback(path, success);
         isProcessingPath = false;
+        //try processing next path if previous path already processed
         TryProcessNext();
     }
 
