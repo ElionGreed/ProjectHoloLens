@@ -5,9 +5,11 @@ using UnityEngine;
 public class UnitManager : MonoBehaviour
 {
     public static UnitManager unitManager;
-    public bool test;
-    public List<GameObject> playerUnits = new List<GameObject>();
+    public List<GameObject> playerUnits = new List<GameObject>(); //placeholder for more friendly units
     public List<GameObject> enemyUnits = new List<GameObject>();
+    public GameObject pathfinding;
+    public GameObject companion;
+    public GameObject playerCharacter;
     // Start is called before the first frame update
     private void Awake()
     {

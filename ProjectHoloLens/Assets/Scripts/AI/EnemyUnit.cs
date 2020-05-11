@@ -5,19 +5,17 @@ using UnityEngine;
 public class EnemyUnit : CommonUnit
 {
 
-    PlayerUnit playerHealth;
+    // PlayerUnit playerHealth;
     [SerializeField]
-    GameObject player;
+    //  GameObject player;
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         UnitManager.unitManager.enemyUnits.Add(gameObject);
-        playerHealth = player.GetComponent<PlayerUnit>();
+      //  playerHealth = Unit.player.GetComponent<PlayerUnit>();
+
     }
 
-    public void DealDamage()
-    {
-        playerHealth.TakeDamage(myDamage);
-    }
 
 }

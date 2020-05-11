@@ -1,163 +1,185 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
+
 [RequireComponent(typeof(Animator))]
 
 public class StateMachine : MonoBehaviour
 {
-    //input number of states
-    //input state Action
-    //input to which other states each state transitions
-    //input state transitions conditions 
 
-
-    NavMeshAgent agent;
-    Animator anim;
+    //PlayerHealth playerHealth;
+    private enum States { Idle, Move, Attack, }
     [SerializeField]
+    private States currState;
+    public bool hasActionFinished;
+    bool isMoving;
+  //  float distance;
+    Animator anim; 
+    PlayerUnit playerUnit;
+    EnemyUnit myUnit;
+    CompanionUnit companionUnit;
+    Unit unit;
     GameObject player;
-    bool proceedTransition = true;
-    bool skipTransition = false;
-    float distance;
-
-    public enum Action { Idle, Move, Attack, Dead }
-    public Action currState;
-    public int stateIndicator;
-    [SerializeField]
-    //public Action currAction;
-    public State[] States;
-    public int myHealth = 20;
+    GameObject companion;
+    GameObject target;
 
 
+    Vector3 vel;
+    Vector3 _prevPosition;
 
-    // Start is called before the first frame update
+    // Use this for initialization
     void Start()
     {
-        stateIndicator = (int)currState;
-        currState = (Action)((int)States[0].perform);
-        agent = GetComponent<NavMeshAgent>();
-        distance = Vector3.Distance(transform.position, player.transform.position);
+        myUnit = GetComponent<EnemyUnit>();
+        anim = GetComponent<Animator>();
+        unit = gameObject.GetComponent<Unit>();
+        currState = States.Move;
+        StartCoroutine(WaitForLoad());
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator WaitForLoad()
     {
-      //  BehaviourLoop();
+        yield return new WaitForSeconds(0.1f);
+        Initialize();
+    }
+    private void Initialize()
+    {
+        player = UnitManager.unitManager.playerCharacter;
+        companion = UnitManager.unitManager.companion;
+        playerUnit = player.GetComponent<PlayerUnit>();
+        companionUnit = companion.GetComponent<CompanionUnit>();
     }
 
-   public void BehaviourLoop()
+    public void BehaviourLoop()
     {
+        hasActionFinished = false;
+        ChooseTarget();
         switch (currState)
         {
-            case Action.Idle:
+
+            case States.Idle:
                 {
-                    agent.isStopped = true;
-                    CheckTransition();
+                    Idle();
                     break;
                 }
-            case Action.Move:
+            case States.Move:
                 {
                     MoveToTarget();
-                    CheckTransition();
                     break;
                 }
-            case Action.Attack:
+            case States.Attack:
                 {
                     AttackTarget();
                     break;
                 }
-            case Action.Dead:
-                {
-                    // Die();
-                    break;
-                }
+   
         }
 
+    }
+
+    void ChooseTarget()
+    {
+        if ((Vector3.Distance(transform.position, player.transform.position)) < (Vector3.Distance(transform.position, companion.transform.position))) 
+        { 
+            target = player;
+        }
+        else
+        {
+            target = companion;
+        }
+ 
+    }
+
+    float CalculateDistance()
+    {
+        float distance = Vector3.Distance(transform.position, target.transform.position);
+        return distance;
+    }
+
+    private IEnumerator FaceMovementDirection()
+    {
+
+        while (transform.hasChanged)
+        {      
+            vel = (transform.position - _prevPosition) / Time.deltaTime;
+            _prevPosition = transform.position;
+            transform.hasChanged = false;
+            if (vel != Vector3.zero)
+            {
+                isMoving = true;
+                anim.SetBool("isMoving", true);
+                transform.rotation = Quaternion.LookRotation(vel, Vector3.up);
+            }
+            else
+            {
+                isMoving = false;
+                anim.SetBool("isMoving", false);
+            }
+            if (CalculateDistance() < 1)
+            {
+                currState = States.Attack;
+            }
+            else if (CalculateDistance() > 1)
+            {
+                currState = States.Move;
+            }        
+            yield return null;
+        }
+        hasActionFinished = true;
+    }
+
+
+    private IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(0.08f);
+        StartCoroutine(FaceMovementDirection());
     }
 
     private void MoveToTarget()
     {
-        agent.isStopped = false;
-        anim.SetTrigger("Move");
-        agent.SetDestination(player.transform.position);
+        PathRequestManager.RequestPath(transform.position, target.transform.position, unit.OnPathFound);
+        StartCoroutine(Wait());
     }
-
-    private void AttackTarget()
+    private void Idle()
     {
-        agent.isStopped = true;
-        anim.SetTrigger("Attack");
-    }
-
-
-
-    void CheckTransition()
-    {
-        for (int n = 0; n < States[stateIndicator].transitions.Length; n++)
+        if(myUnit.myHealth < 1)
         {
-
-            if (States[stateIndicator].transitions[n].checkMyHealth == true)
-            {
-                if (myHealth == 0)
-                {
-                    proceedTransition = true;
-                }
-                else
-                {
-                    skipTransition = true;
-                }
-            }
-            if (States[stateIndicator].transitions[n].checkDistance == true)
-            {
-                if (distance < 15)
-                {
-                    proceedTransition = true;
-                }
-                else
-                {
-                    skipTransition = true;
-                }
-            }
-            if (States[stateIndicator].transitions[n].checkCloseDistance == true)
-            {
-                if (distance < 2)
-                {
-                    proceedTransition = true;
-                }
-                else
-                {
-                    skipTransition = true;
-                }
-            }
-            if (proceedTransition == true && skipTransition == false)
-            {
-
-                stateIndicator = (int)States[stateIndicator].transitions[n].transitTo;
-                currState = (Action)(stateIndicator);
-                n = States[stateIndicator].transitions.Length;
-            }
+            currState = States.Idle;
+        }  
+       else if (CalculateDistance() > 1)
+        {
+            currState = States.Move;
+        }
+        else if (CalculateDistance() < 1)
+        {
+            currState = States.Attack;
         }
     }
-}
+    private void AttackTarget()
+    {
+        if (myUnit.myHealth < 1)
+        {
+            currState = States.Idle;
+        }
+        else if (CalculateDistance() > 1)
+        {
+            currState = States.Move;
+        }
+        else if (CalculateDistance() < 1)
+        {
+            currState = States.Attack;
+            if (target == player)
+            {
+                playerUnit.TakeDamage(myUnit.myDamage);
+            }
+            else if (target == companion)
+            {
+                companionUnit.TakeDamage(myUnit.myDamage);
+            }
+        }
+        hasActionFinished = true;
+        anim.SetTrigger("Attack");
 
-
-[System.Serializable]
-public class State
-{
-    public enum Action { Idle, Move, Attack, Dead }
-    public Action perform;
-    public Transit[] transitions;
-}
-
-
-[System.Serializable]
-public class Transit
-{
-    public enum Action { Idle, Move, Attack, Dead }
-    public Action transitTo;
-    public bool checkMyHealth;
-    public bool checkCloseDistance;
-    public bool checkDistance;
-
+    }
 }

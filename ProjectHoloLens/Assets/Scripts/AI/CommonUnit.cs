@@ -1,41 +1,66 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class CommonUnit : MonoBehaviour
 {
+    Animator anim;
     [SerializeField]
-    protected int myHealth, mySpeed, myDamage;
-    private int maxHealth = 100;
+    public int myHealth;
+    [SerializeField]
+    public int mySpeed;
+    [SerializeField]
+    public int myDamage;
+    public int maxHealth;
+    Unit unit;
     public Image HPBar;
+    public GameObject panel;
 
-    private void Awake()
+
+
+
+    // Start is called before the first frame update
+    protected virtual void Start()
     {
-        myHealth = maxHealth;
+     
+        unit = gameObject.GetComponent<Unit>();
+        unit.numOfMoves = mySpeed;
+        anim = GetComponent<Animator>();
+        anim.SetFloat("HP", myHealth);
+        maxHealth = myHealth;
     }
-    private void Start()
+
+ 
+ 
+    public void TakeDamage(int damage)
     {
-
+        myHealth -= damage;
+        Debug.Log(myHealth);
+        anim.SetFloat("HP", myHealth);
+        Die();
     }
 
-    public void TakeDamage(int amount)
-    {
-        myHealth -= amount;
-        HPBar.fillAmount = myHealth / maxHealth;
-        print("taking dmg");
-
-        if (myHealth <= 0)
-        {
-            Die();
-        }
-    }
+   
 
     void Die()
     {
-        UnitManager.unitManager.enemyUnits.Remove(gameObject);
-        UnitManager.unitManager.playerUnits.Remove(gameObject);
+        if (myHealth <= 0)
+        {
+            UnitManager.unitManager.enemyUnits.Remove(gameObject);
+            StartCoroutine(Wait());
+            if(gameObject.tag == "Enemy")
+            {
+                GameControl.control.kills++;
+            }
+            if(gameObject.tag == "Player")
+            {
+                panel.SetActive(true);
+            }
+        }
+    }
+    private IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(2);
         Destroy(gameObject);
     }
 }
