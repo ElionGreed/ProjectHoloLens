@@ -87,7 +87,14 @@ public class StateMachine : MonoBehaviour
         }
         else
         {
-            target = companion;
+            if (companionUnit.myHealth > 0)
+            {
+                target = companion;
+            }
+            else
+            {
+                target = player;
+            }
         }
  
     }

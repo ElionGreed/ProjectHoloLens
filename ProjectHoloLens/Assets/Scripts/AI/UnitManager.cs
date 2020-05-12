@@ -13,6 +13,7 @@ public class UnitManager : MonoBehaviour
     public GameObject playerCharacter;
     public Button PushAway;
     public Button MovePlayer;
+    public GameObject panel;
 
     // Start is called before the first frame update
     private void Awake()

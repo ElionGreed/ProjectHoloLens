@@ -982,6 +982,7 @@
     <Compile Include="Assets\Scripts\AI\StateMachine.cs" />
     <Compile Include="Assets\Scripts\AI\TurnManager.cs" />
     <Compile Include="Assets\Scripts\AI\UnitManager.cs" />
+    <Compile Include="Assets\Scripts\BasicInstantaie.cs" />
     <Compile Include="Assets\Scripts\DungeonGen\ADoorways.cs" />
     <Compile Include="Assets\Scripts\DungeonGen\DungeonGen.cs" />
     <Compile Include="Assets\Scripts\DungeonGen\EndRoom.cs" />

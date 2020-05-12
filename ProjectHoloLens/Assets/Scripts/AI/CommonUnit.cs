@@ -54,16 +54,20 @@ public class CommonUnit : MonoBehaviour
             }
             if(gameObject.tag == "Player")
             {
+                panel = UnitManager.unitManager.panel;
                 panel.SetActive(true);
             }
         }
     }
     private IEnumerator Wait()
     {
-        yield return new WaitForSeconds(2);
-        if (gameObject.tag != "Player")
+        yield return new WaitForSeconds(1);
+
+        yield return new WaitForSeconds(1);
+        if (gameObject.tag != "Player" || gameObject.tag!="Companion")
         {
             Destroy(gameObject);
         }
+        
     }
 }
