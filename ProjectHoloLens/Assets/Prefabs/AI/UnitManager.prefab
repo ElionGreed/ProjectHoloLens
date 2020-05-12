@@ -49,6 +49,8 @@ MonoBehaviour:
   pathfinding: {fileID: 0}
   companion: {fileID: 0}
   playerCharacter: {fileID: 0}
+  PushAway: {fileID: 0}
+  MovePlayer: {fileID: 0}
 --- !u!114 &7761216526614209756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,3 +63,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c657a5fd5b5c0d4eacda52971c4e4f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 0}
+  skillButtons: []

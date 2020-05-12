@@ -14,12 +14,13 @@ public class PushAway : MonoBehaviour
     EnemyUnit enemyUnit;
     Vector3 goal;
     public Button button;
-   
+    GameObject player;
     
    public void Explosion()
     {
+        player = UnitManager.unitManager.playerCharacter;
         button.interactable = false;
-        centre = gameObject.transform.position;
+        centre = player.transform.position;
         Collider[] hitColliders = Physics.OverlapSphere(centre, radius);
         foreach (Collider collider in hitColliders)
         {
@@ -28,7 +29,7 @@ public class PushAway : MonoBehaviour
             {
                 enemyUnit = collider.GetComponent<EnemyUnit>();
                 enemyUnit.TakeDamage(myDamage);
-                direction = (enemyUnit.transform.position - gameObject.transform.position).normalized;
+                direction = (enemyUnit.transform.position - player.transform.position).normalized;
                 goal = enemyUnit.transform.position + direction * 4;
                 StartCoroutine(MoveToPosition(enemyUnit.transform, goal));
                 
