@@ -163,7 +163,7 @@ public class CompanionAI : MonoBehaviour
             anim.SetTrigger("Attack");
             enemyUnit.TakeDamage(companion.myDamage);
             hasActionFinished = true;
-            hasAttacked = true;
+            hasAttacked = true;   //to avoid double attack
         }
     }
 

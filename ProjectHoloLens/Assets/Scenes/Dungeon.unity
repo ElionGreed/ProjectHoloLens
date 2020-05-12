@@ -660,7 +660,7 @@ GameObject:
   - component: {fileID: 576789885}
   - component: {fileID: 576789884}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: CountKill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
