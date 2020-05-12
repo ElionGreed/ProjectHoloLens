@@ -43,8 +43,6 @@ public class DungeonGen : MonoBehaviour
 
 		PlaceEndRoom();
 		yield return interval;
-		Debug.Log("Level generation finished");
-
 		player = Instantiate(playerPrefab) as PlayerCon;
 		player.transform.position = startRoom.playerStart.position;
 		player.transform.rotation = startRoom.playerStart.rotation;
@@ -143,7 +141,6 @@ public class DungeonGen : MonoBehaviour
 				}
 				else
 				{
-					Debug.LogError("Overlap detected");
 					return true;
 				}
 			}
@@ -185,8 +182,6 @@ public class DungeonGen : MonoBehaviour
 
 	void ResetLevelGenerator()
 	{
-		Debug.LogError("Reset level generator");
-
 		StopCoroutine("GenerateLevel");
 
 		if (startRoom)
