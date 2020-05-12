@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UnitManager : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class UnitManager : MonoBehaviour
     public GameObject pathfinding;
     public GameObject companion;
     public GameObject playerCharacter;
+    public Button PushAway;
+    public Button MovePlayer;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -23,7 +27,4 @@ public class UnitManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    // Update is called once per frame
-
 }
