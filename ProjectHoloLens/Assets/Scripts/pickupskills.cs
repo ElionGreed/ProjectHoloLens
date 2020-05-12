@@ -1,50 +1,41 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class pickupskills : MonoBehaviour
 {
 
-    public Vector3 Spot;
-    public bool canbeHeld = true;
-    public GameObject Item;
-    public GameObject Parent;
-    public bool isbeingHeld = false;
 
-    // Start is called before the first frame update
+    private Vector3 mouseOffset;
+    private float MouseZCord;
+
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(isbeingHeld == true)
-        {
-            Item.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            Item.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-            Item.transform.SetParent(Parent.transform);
-        }
-        else
-        {
-            Spot = Item.transform.position;
-            Item.transform.SetParent(null);
-            Item.GetComponent<Rigidbody>().useGravity = true;
-            Item.transform.position = Spot;
-
-        }
     }
 
     public void OnMouseDown()
     {
-        isbeingHeld = true;
-        Item.GetComponent<Rigidbody>().useGravity = false;
-        Item.GetComponent<Rigidbody>().detectCollisions = true;
+        MouseZCord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
+        mouseOffset = gameObject.transform.position - GetMouseWorldPos();
     }
 
-    public void OnMouseUp()
+
+
+    private Vector3 GetMouseWorldPos()
     {
-        isbeingHeld = false;
+        Vector3 MousePoint = Input.mousePosition;
+        MousePoint.z = MouseZCord;
+        return Camera.main.ScreenToWorldPoint(MousePoint);
+    }
+
+    public void OnMouseDrag()
+    {
+        transform.position = GetMouseWorldPos() + mouseOffset;
     }
 }
