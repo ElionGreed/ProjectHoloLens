@@ -43,8 +43,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.6690645, y: 38.784416, z: 21.3348}
-  m_Center: {x: -8.48896, y: -7.6497407, z: -9.266836}
+  m_Size: {x: 19.099998, y: 37.553406, z: 5.8896065}
+  m_Center: {x: -25.67091, y: -41.90674, z: -25.524855}
 --- !u!114 &2208338599285246427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,8 +63,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   enemyPrefabs:
+  - {fileID: 4551859259768837957, guid: f41c3cf5b807cad46a21bd644fc31b38, type: 3}
   - {fileID: 195989112359885594, guid: 0f3c1a8e24fbe84419de55b37afe7760, type: 3}
-  - {fileID: 8598934516432051251, guid: fe9b0d9cf040f0f4689dda9c0281a212, type: 3}
   - {fileID: 1770990729789251251, guid: 2f115c2efdde28c44b74de4ff7abbdd5, type: 3}
   - {fileID: 4109638503192773613, guid: caab871692104d14aacd0b972dfd1ca1, type: 3}
-  - {fileID: 4551859259768837957, guid: f41c3cf5b807cad46a21bd644fc31b38, type: 3}
+  - {fileID: 8598934516432051251, guid: fe9b0d9cf040f0f4689dda9c0281a212, type: 3}

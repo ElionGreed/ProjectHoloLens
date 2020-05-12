@@ -14,6 +14,7 @@ public class StateMachine : MonoBehaviour
     private States currState;
     public bool hasActionFinished;
     bool isMoving;
+    bool hasAttacked;
   //  float distance;
     Animator anim; 
     PlayerUnit playerUnit;

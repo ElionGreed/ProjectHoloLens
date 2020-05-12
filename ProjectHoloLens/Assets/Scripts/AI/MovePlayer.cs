@@ -47,7 +47,7 @@ public class MovePlayer : MonoBehaviour
             {
                 RaycastHit hit;
 
-                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+                if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit, 100))
                 {
                     Cursor.SetCursor(null, Vector2.zero, cursorMode);
                     PathRequestManager.RequestPath(player.transform.position, hit.point, unit.OnPathFound);

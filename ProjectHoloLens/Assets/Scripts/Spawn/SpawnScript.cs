@@ -28,7 +28,8 @@ public class SpawnScript : MonoBehaviour
        for(int i = 0; i < numOfSpawns; i++)
         {
             enemyPrefab = Random.Range(0, 4);
-            Object.Instantiate(enemyPrefabs[enemyPrefab], spawnPoints[i].transform);
+            spawnPoints[i] = Instantiate((enemyPrefabs[enemyPrefab]));
+           
         }
         gameObject.SetActive(false);
     }

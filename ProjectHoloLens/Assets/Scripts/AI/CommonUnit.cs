@@ -61,6 +61,9 @@ public class CommonUnit : MonoBehaviour
     private IEnumerator Wait()
     {
         yield return new WaitForSeconds(2);
-        Destroy(gameObject);
+        if (gameObject.tag != "Player")
+        {
+            Destroy(gameObject);
+        }
     }
 }

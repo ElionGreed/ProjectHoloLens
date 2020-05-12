@@ -12,6 +12,7 @@ public class CompanionAI : MonoBehaviour
     int designantedEnemy; //which enemy unit to perform action on
     public bool hasActionFinished; //checks if 
     bool isMoving;
+    bool hasAttacked;
     Animator anim;
     [SerializeField]
     GameObject player;
@@ -65,6 +66,7 @@ public class CompanionAI : MonoBehaviour
     }
     private void chooseAction()
     {
+        hasAttacked = false;
         anim.SetFloat("HP", companion.myHealth);
         biggestAction = 3;
         for (int n = 0; n < 4; n++)
@@ -156,9 +158,13 @@ public class CompanionAI : MonoBehaviour
 
     private void AttackEnemy()
     {
-        anim.SetTrigger("Attack");
-        enemyUnit.TakeDamage(companion.myDamage);
-        hasActionFinished = true;
+        if (hasAttacked == false)
+        {
+            anim.SetTrigger("Attack");
+            enemyUnit.TakeDamage(companion.myDamage);
+            hasActionFinished = true;
+            hasAttacked = true;   //to avoid double attack
+        }
     }
 
     private IEnumerator Wait()

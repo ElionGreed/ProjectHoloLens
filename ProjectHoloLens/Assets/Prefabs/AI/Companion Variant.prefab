@@ -1381,6 +1381,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1821086834946963119}
     m_Modifications:
+    - target: {fileID: 2797027161657592914, guid: bec32995d1472f040aba7c573ae529a7,
+        type: 3}
+      propertyPath: m_Name
+      value: Canvas_HealthBar
+      objectReference: {fileID: 0}
     - target: {fileID: 2797027161657592924, guid: bec32995d1472f040aba7c573ae529a7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1500,11 +1505,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.0001666667
-      objectReference: {fileID: 0}
-    - target: {fileID: 2797027161657592914, guid: bec32995d1472f040aba7c573ae529a7,
-        type: 3}
-      propertyPath: m_Name
-      value: Canvas_HealthBar
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bec32995d1472f040aba7c573ae529a7, type: 3}
