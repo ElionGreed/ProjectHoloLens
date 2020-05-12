@@ -26,7 +26,6 @@ public class TurnManager : MonoBehaviour
 
     private void Initialize()
     {
-         companionAI = UnitManager.unitManager.companion.GetComponent<CompanionAI>();
     }
     public void EndTurn()
     {
@@ -44,6 +43,7 @@ public class TurnManager : MonoBehaviour
 
     private void CompanionTurn()
     {
+        companionAI = UnitManager.unitManager.companion.GetComponent<CompanionAI>();
         companionAI.CalculateUtility();
         StartCoroutine(CheckIfCompanionFinished());
     }
