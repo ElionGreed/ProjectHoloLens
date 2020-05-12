@@ -2135,6 +2135,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas_Instructions
       objectReference: {fileID: 0}
+    - target: {fileID: 7081754260282066516, guid: 00f0fad820561ea439d6d494aa4e6840,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7081754260282066538, guid: 00f0fad820561ea439d6d494aa4e6840,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2193,7 +2198,7 @@ PrefabInstance:
     - target: {fileID: 7081754260282066538, guid: 00f0fad820561ea439d6d494aa4e6840,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 350.753
+      value: 594
       objectReference: {fileID: 0}
     - target: {fileID: 7081754260282066538, guid: 00f0fad820561ea439d6d494aa4e6840,
         type: 3}
@@ -2240,11 +2245,36 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7081754259824735687, guid: 00f0fad820561ea439d6d494aa4e6840,
+    - target: {fileID: 7081754260107963392, guid: 00f0fad820561ea439d6d494aa4e6840,
         type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7081754260144976825, guid: 00f0fad820561ea439d6d494aa4e6840,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7081754260144976825, guid: 00f0fad820561ea439d6d494aa4e6840,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7081754260144976825, guid: 00f0fad820561ea439d6d494aa4e6840,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7081754260144976825, guid: 00f0fad820561ea439d6d494aa4e6840,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7081754260144976825, guid: 00f0fad820561ea439d6d494aa4e6840,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7081754261412900706, guid: 00f0fad820561ea439d6d494aa4e6840,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -2270,30 +2300,10 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7081754260144976825, guid: 00f0fad820561ea439d6d494aa4e6840,
+    - target: {fileID: 7081754259824735687, guid: 00f0fad820561ea439d6d494aa4e6840,
         type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7081754260144976825, guid: 00f0fad820561ea439d6d494aa4e6840,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7081754260144976825, guid: 00f0fad820561ea439d6d494aa4e6840,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7081754260144976825, guid: 00f0fad820561ea439d6d494aa4e6840,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7081754260144976825, guid: 00f0fad820561ea439d6d494aa4e6840,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00f0fad820561ea439d6d494aa4e6840, type: 3}
@@ -2484,15 +2494,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tree: {fileID: 6734642153187381400, guid: c027c9cd95de3134a9547f3b0277c3c2, type: 3}
-  worldItems: {fileID: 5524860210708006664, guid: 1aa65196ea0d1b64ca99e9b66eed8332,
-    type: 3}
-  minTSize: 25
-  maxTSize: 50
-  minISize: 25
-  maxISize: 50
+  TreeTwo: {fileID: 0}
+  TreeThree: {fileID: 0}
+  minTreeOneSize: 0
+  maxTreeOneSize: 0
+  minTreeTwoSize: 0
+  maxTreeTwoSize: 0
+  minTreeThreeSize: 0
+  maxTreeThreeSize: 0
   noiseImage: {fileID: 2800000, guid: 22a8eef484fc2d1429b7260b716794e0, type: 3}
-  forestSize: 1155
-  worldItemSize: 500
+  TreeSizeOne: 0
+  TreeSizeTwo: 0
+  TreeSizeThree: 0
   treeDensity: 0.008
   itemDensity: 0.008
 --- !u!1 &1650019170

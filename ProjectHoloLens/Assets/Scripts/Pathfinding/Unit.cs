@@ -9,6 +9,7 @@ public class Unit : MonoBehaviour
     Vector3[] path;
     int targetIndex;
     public int numOfMoves = 3;
+    private int remainingMoves;
     //public GameObject objToMove;
 
     void Start()
@@ -29,21 +30,22 @@ public class Unit : MonoBehaviour
 
     IEnumerator MoveUnit(int numOfMoves)
     {
-        Vector3 currentWaypoint = path[0];
+        Vector3 currentNode = path[0];
 
         while (true)
         {
-            if (transform.position == currentWaypoint)
+            if (transform.position == currentNode)
             {
                 targetIndex++;
                 if (targetIndex >=path.Length || targetIndex == numOfMoves)
                 {
                     yield break;
                 }
-                currentWaypoint = path[targetIndex];
+                currentNode = path[targetIndex];
             }
 
-            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
+            int remainingMoves = path.Length - numOfMoves;
+            transform.position = Vector3.MoveTowards(transform.position, currentNode, speed * Time.deltaTime);
             yield return null;
         }
     }

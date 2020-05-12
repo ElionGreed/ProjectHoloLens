@@ -121,7 +121,7 @@ public class Pathfinding : MonoBehaviour
         Array.Reverse(pathInV3);
         return pathInV3;
 
-        //List<Vector3> vPath = new List<Vector3>();
+
     }
 
     Vector3[] pathToV3(List<Nodess> path)
