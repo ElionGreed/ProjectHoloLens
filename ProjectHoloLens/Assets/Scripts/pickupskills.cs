@@ -5,36 +5,46 @@ using UnityEngine;
 public class pickupskills : MonoBehaviour
 {
 
-    public GameObject oogaItem;
-    public GameObject oogaParent;
-    public GameObject Booga;
+    public Vector3 Spot;
+    public bool canbeHeld = true;
+    public GameObject Item;
+    public GameObject Parent;
+    public bool isbeingHeld = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        oogaItem.GetComponent<Rigidbody>().useGravity = true;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(isbeingHeld == true)
+        {
+            Item.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            Item.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            Item.transform.SetParent(Parent.transform);
+        }
+        else
+        {
+            Spot = Item.transform.position;
+            Item.transform.SetParent(null);
+            Item.GetComponent<Rigidbody>().useGravity = true;
+            Item.transform.position = Spot;
 
+        }
     }
 
     public void OnMouseDown()
     {
-        oogaItem.GetComponent<Rigidbody>().useGravity = false;
-        oogaItem.GetComponent<Rigidbody>().isKinematic = true;
-        oogaItem.transform.position = Booga.transform.position;
-        oogaItem.transform.rotation = Booga.transform.rotation;
-        oogaItem.transform.parent = oogaParent.transform;
+        isbeingHeld = true;
+        Item.GetComponent<Rigidbody>().useGravity = false;
+        Item.GetComponent<Rigidbody>().detectCollisions = true;
     }
 
     public void OnMouseUp()
     {
-        oogaItem.GetComponent<Rigidbody>().useGravity = true;
-        oogaItem.GetComponent<Rigidbody>().isKinematic = false;
-        oogaItem.transform.parent = null;
-        oogaItem.transform.position = Booga.transform.position;
+        isbeingHeld = false;
     }
 }
