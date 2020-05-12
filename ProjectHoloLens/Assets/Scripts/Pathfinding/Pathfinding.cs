@@ -8,10 +8,11 @@ public class Pathfinding : MonoBehaviour
     PathRequestManager requestManager;
     GridManager grid;
 
-    void Awake()
+    void Start()
     {
         requestManager = GetComponent<PathRequestManager>();
         grid = GetComponent<GridManager>();
+        UnitManager.unitManager.pathfinding = gameObject;
     }
 
     //find manhattan distance
