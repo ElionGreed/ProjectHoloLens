@@ -9,7 +9,8 @@ public class TurnManager : MonoBehaviour
     CompanionAI companionAI;
     [SerializeField]
     Button button;
-    bool isEnemyDone;
+    [SerializeField]
+    Button[] skillButtons;
     bool isCompanionDone;
 
     private void Start()
@@ -29,7 +30,10 @@ public class TurnManager : MonoBehaviour
     }
     public void EndTurn()
     {
-        isEnemyDone = false;
+        foreach(Button button in skillButtons)
+        {
+            button.interactable = false;
+        }
         isCompanionDone = false;
         button.interactable = false;
         StartCoroutine(CheckIfEnemyFinished());
@@ -37,14 +41,7 @@ public class TurnManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void EnemyTurns()
-    {
-        for (int i = 0; i < UnitManager.unitManager.enemyUnits.Count; i++) {
-            stateMachine = UnitManager.unitManager.enemyUnits[i].GetComponent<StateMachine>();
-            stateMachine.BehaviourLoop();
-        }
-        StartCoroutine(CheckIfEnemyFinished());
-    }
+
     private void CompanionTurn()
     {
         companionAI.CalculateUtility();
@@ -80,6 +77,10 @@ public class TurnManager : MonoBehaviour
             yield return null;
         }
         button.interactable = true;
+        foreach (Button button in skillButtons)
+        {
+            button.interactable = true;
+        }
     }
 
 

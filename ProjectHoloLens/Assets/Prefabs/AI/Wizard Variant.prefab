@@ -72,6 +72,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wizard Variant
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 25dc3e24976eccb4ea714d0b96d7e947,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: -6057140222963153312, guid: 25dc3e24976eccb4ea714d0b96d7e947,
         type: 3}
       propertyPath: m_Controller
