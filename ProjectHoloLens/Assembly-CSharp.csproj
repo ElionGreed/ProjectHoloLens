@@ -94,11 +94,10 @@
     <Compile Include="Assets\Scripts\AI\StateMachine.cs" />
     <Compile Include="Assets\Scripts\AI\TurnManager.cs" />
     <Compile Include="Assets\Scripts\AI\UnitManager.cs" />
-    <Compile Include="Assets\Scripts\DungeonGen\Doorway.cs" />
+    <Compile Include="Assets\Scripts\DungeonGen\ADoorways.cs" />
     <Compile Include="Assets\Scripts\DungeonGen\DungeonGen.cs" />
-    <Compile Include="Assets\Scripts\DungeonGen\DungeonGenerations.cs" />
     <Compile Include="Assets\Scripts\DungeonGen\EndRoom.cs" />
-    <Compile Include="Assets\Scripts\DungeonGen\Room.cs" />
+    <Compile Include="Assets\Scripts\DungeonGen\RoomScript.cs" />
     <Compile Include="Assets\Scripts\DungeonGen\StartRoom.cs" />
     <Compile Include="Assets\Scripts\FogOfWar.cs" />
     <Compile Include="Assets\Scripts\HealthPowerUps.cs" />
