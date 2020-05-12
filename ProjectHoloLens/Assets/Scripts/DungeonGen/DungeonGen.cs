@@ -8,6 +8,7 @@ public class DungeonGen : MonoBehaviour
 	public List<RoomScript> roomPrefabs = new List<RoomScript>();
 	public Vector2 iterationRange = new Vector2(3, 10);
 	public GameObject playerPrefab;
+	public GameObject CompanionVariant;
 
 	List<ADoorways> avDoorways = new List<ADoorways>();
 
@@ -18,6 +19,7 @@ public class DungeonGen : MonoBehaviour
 	LayerMask roomLayerMask;
 
 	GameObject player;
+	GameObject Companion;
 
 	void Start()
 	{
@@ -46,6 +48,10 @@ public class DungeonGen : MonoBehaviour
 		player = Instantiate(playerPrefab);
 		player.transform.position = startRoom.playerStart.position;
 		player.transform.rotation = startRoom.playerStart.rotation;
+
+		Companion = Instantiate(CompanionVariant);
+		Companion.transform.position = startRoom.playerStart.position;
+		Companion.transform.rotation = startRoom.playerStart.rotation;
 	}
 
 	void PlaceStartRoom()
