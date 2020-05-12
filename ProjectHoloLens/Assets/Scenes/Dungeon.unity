@@ -362,11 +362,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbcb23027c8794b4c8901a672902b28d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Spot: {x: 0, y: 0, z: 0}
-  canbeHeld: 1
-  Item: {fileID: 2338756620921257723, guid: f06a6e52f88071a4cbf28a037504298a, type: 3}
-  Parent: {fileID: 116703620}
-  isbeingHeld: 0
 --- !u!1001 &365380702
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1104,9 +1099,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6305228863938675136, guid: d769a48feb11ae24ea12e0d2c6d2fc96,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6305228863938675136, guid: d769a48feb11ae24ea12e0d2c6d2fc96,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 143006023}
+    - target: {fileID: 6305228863938675136, guid: d769a48feb11ae24ea12e0d2c6d2fc96,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6305228863938675136, guid: d769a48feb11ae24ea12e0d2c6d2fc96,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6305228864662415597, guid: d769a48feb11ae24ea12e0d2c6d2fc96,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1213,6 +1223,50 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4095729465337148812}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1947563322
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1947563324}
+  - component: {fileID: 1947563323}
+  m_Layer: 0
+  m_Name: MakeRock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1947563323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947563322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2497406c41ab6bc4691bd2a5d21cd2ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rock: {fileID: 2338756620921257723, guid: f06a6e52f88071a4cbf28a037504298a, type: 3}
+--- !u!4 &1947563324
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947563322}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 609.21576, y: -961.71484, z: 1183.2856}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2087489857 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9022545246472056404, guid: b3ceb802ca72803448591ee6a25a26ea,
