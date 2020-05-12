@@ -16,21 +16,23 @@ public class MovePlayer : MonoBehaviour
     Vector3 vel;
     Vector3 _prevPosition;
     GameObject player;
-
+    [SerializeField]
+    Camera camera;
     public Texture2D cursorTexture;
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot = Vector2.zero;
     // Start is called before the first frame update
     void Start()
     {
-        anim = gameObject.GetComponent<Animator>();
-        unit = gameObject.GetComponent<Unit>();
-        button = UnitManager.unitManager.MovePlayer;
+        
+        
     }
 
     public void Initialize()
     {
         player = UnitManager.unitManager.playerCharacter;
+        anim = player.GetComponent<Animator>();
+        unit = player.gameObject.GetComponent<Unit>();
         button.interactable = false;
         hasMoved = false;
         StartCoroutine(Move());
@@ -45,7 +47,7 @@ public class MovePlayer : MonoBehaviour
             {
                 RaycastHit hit;
 
-                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+                if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit, 100))
                 {
                     Cursor.SetCursor(null, Vector2.zero, cursorMode);
                     PathRequestManager.RequestPath(player.transform.position, hit.point, unit.OnPathFound);

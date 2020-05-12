@@ -299,7 +299,7 @@ MonoBehaviour:
   centre: {x: 0, y: 0, z: 0}
   radius: 3
   myDamage: 20
-  button: {fileID: 0}
+  button: {fileID: 1231941275}
 --- !u!114 &143006025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,8 +312,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c89af6718aa0e0408fdfce05a3a0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 0}
-  cursorTexture: {fileID: 0}
+  button: {fileID: 1231941272}
+  camera: {fileID: 1458441792}
+  cursorTexture: {fileID: 2800000, guid: 97afb70a4109432429071358cfca551c, type: 3}
   cursorMode: 0
   hotSpot: {x: 0, y: 0}
 --- !u!95 &143006026
@@ -361,10 +362,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbcb23027c8794b4c8901a672902b28d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oogaItem: {fileID: 2338756620921257723, guid: f06a6e52f88071a4cbf28a037504298a,
-    type: 3}
-  oogaParent: {fileID: 116703620}
-  Booga: {fileID: 2338756620921257723, guid: f06a6e52f88071a4cbf28a037504298a, type: 3}
+  Spot: {x: 0, y: 0, z: 0}
+  canbeHeld: 1
+  Item: {fileID: 2338756620921257723, guid: f06a6e52f88071a4cbf28a037504298a, type: 3}
+  Parent: {fileID: 116703620}
+  isbeingHeld: 0
 --- !u!1001 &365380702
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -672,7 +674,8 @@ MonoBehaviour:
   iterationRange: {x: 5, y: 15}
   playerPrefab: {fileID: 7019905272269332160, guid: da26a6156469ec144b62035ac15fdd49,
     type: 3}
-  CompanionVariant: {fileID: 0}
+  CompanionVariant: {fileID: 1821086834946963114, guid: 7f8f63107015f124bb8c7c43b5bf00db,
+    type: 3}
 --- !u!4 &785791115
 Transform:
   m_ObjectHideFlags: 0
@@ -1046,6 +1049,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!20 &1458441792 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2309257614519039747, guid: e753b27becb02cd4e8c0d11e5e9fe5ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 365380702}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1698534512 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4095729465793503740, guid: f66e086e9c4648f47b278e1df0d84080,
@@ -1070,6 +1079,72 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 9022545247476367125}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2122385559
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2122385562}
+  - component: {fileID: 2122385561}
+  - component: {fileID: 2122385560}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2122385560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122385559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &2122385561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122385559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &2122385562
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122385559}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2134233764
 PrefabInstance:
   m_ObjectHideFlags: 0
