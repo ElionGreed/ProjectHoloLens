@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Room : MonoBehaviour
+public class RoomScript : MonoBehaviour
 {
 
-    public Doorway[] doorways;
+    public ADoorways[] doorways;
     public MeshCollider meshCollider;
 
     public Bounds RoomBounds
@@ -13,13 +13,11 @@ public class Room : MonoBehaviour
         get { return meshCollider.bounds; }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
