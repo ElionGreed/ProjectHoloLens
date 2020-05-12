@@ -28,7 +28,7 @@ public class CompanionAI : MonoBehaviour
     void Start()
     {
         unit = gameObject.GetComponent<Unit>();
-        player = UnitManager.unitManager.playerCharacter;
+        
         companion = gameObject.GetComponent<CompanionUnit>();
         anim = GetComponent<Animator>();
 
@@ -37,7 +37,12 @@ public class CompanionAI : MonoBehaviour
     public void CalculateUtility() //calculate which enemy to attack
     {
         hasActionFinished = false;
-        CalculateEnemyPriority();
+
+        if (UnitManager.unitManager.enemyUnits.Count > 0)
+        {
+            CalculateEnemyPriority();
+        }
+
         utilityValues[0] = 0;  // Death Value
         if (companion.myHealth < 1)
         {
@@ -144,6 +149,7 @@ public class CompanionAI : MonoBehaviour
     }
     private void Follow()
     {
+        player = UnitManager.unitManager.playerCharacter;
         PathRequestManager.RequestPath(gameObject.transform.position, player.transform.position, unit.OnPathFound);
         StartCoroutine(Wait());
     }
@@ -182,11 +188,13 @@ public class CompanionAI : MonoBehaviour
                 isMoving = false;
                 anim.SetBool("isMoving", false);
             }
-
-            if(Vector3.Distance(transform.position, enemyUnit.transform.position) < 1)
+            if (UnitManager.unitManager.enemyUnits.Count > 0)
             {
-                AttackEnemy();
-            }   
+                if (Vector3.Distance(transform.position, enemyUnit.transform.position) < 1)
+                {
+                    AttackEnemy();
+                }
+            }
             yield return null;
          
         }
