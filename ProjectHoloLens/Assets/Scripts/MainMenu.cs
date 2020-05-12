@@ -27,7 +27,7 @@ public class MainMenu : MonoBehaviour
         optionsPanel.SetActive(false);
         creditsPanel.SetActive(false);
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("Dungeon");
     }
 
     public void ShowCredits()
